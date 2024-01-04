@@ -1,6 +1,7 @@
 <template>
   <ModalBase title="Authentification" :is-open="isOpen" :label="props.label" @show-dialog="showDialog">
     <template #content>
+      <h3 class="mb-3">Inscrit toi ou connecte toi avec simplement ton email</h3>
       <UForm :schema="authSchema" :state="state" class="space-y-4" @submit="onSubmit">
         <UFormGroup label="Email" name="email">
           <UInput v-model="state.email" autocomplete="email" />
@@ -9,17 +10,17 @@
           <UButton class="dark:text-white" @click="showDialog" color="red">
             Fermer
           </UButton>
-          <UButton :disabled="!hasCaptchatoken" type="submit" class="dark:text-white">
+          <UButton :loading="isLoading" :disabled="!hasCaptchaToken" type="submit" class="dark:text-white">
             Se connecter
           </UButton>
         </div>
         <UDivider label="Autre" />
-        <BtnGoogleAuth />
+        <BtnGoogleAuth :disabled="!hasCaptchaToken" class="w-1/4 mx-auto" />
       </UForm>
     </template>
     <template #footer>
       <div class="flex justify-center">
-        <NuxtTurnstile v-if="state.email" v-model="state.captchaToken" />
+        <NuxtTurnstile v-model="state.captchaToken" />
       </div>
     </template>
   </ModalBase>
@@ -38,12 +39,14 @@ interface FormAuthPropOptions {
 const props = withDefaults(defineProps<FormAuthPropOptions>(), {
   label: 'Rejoins nous !'
 })
-const supabase = useSupabaseClient()
+const toast = useToast()
+const { auth } = useSupabaseClient()
 const runtimeConfig = useRuntimeConfig()
-const isOpen = ref<boolean>(false)
-const hasCaptchatoken = ref<boolean>(false)
 const { authSchema } = useAuth()
 const emailStore = useState<string>('email')
+const isOpen = ref<boolean>(false)
+const hasCaptchaToken = ref<boolean>(false)
+const isLoading = ref<boolean>(false)
 const state = reactive({
   email: undefined,
   captchaToken: undefined
@@ -51,21 +54,42 @@ const state = reactive({
 
 // WATCHERS
 watch(() => state.captchaToken, (value) => {
-  hasCaptchatoken.value = !!value
+  hasCaptchaToken.value = !!value
+}, {
+  immediate: true
 })
 
 // FUNCTIONS
 async function onSubmit(authEvent: FormSubmitEvent<AuthSchemaType>): Promise<void> {
+  isLoading.value = true
   emailStore.value = authEvent.data.email
-  const { error } = await supabase.auth.signInWithOtp({
+  const { error } = await auth.signInWithOtp({
     email: authEvent.data.email,
     options: {
-      emailRedirectTo: `${runtimeConfig.public.NUXT_PUBLIC_FRONTEND_URL}/confirm`,
-      shouldCreateUser: false,
+      emailRedirectTo: `${runtimeConfig.public.NUXT_PUBLIC_FRONTEND_URL}/confirm/${authEvent.data.email}`,
       captchaToken: authEvent.data.captchaToken,
     }
   })
+  if (!error) {
+    toast.add({
+      id: 'auth_notification',
+      title: 'Email envoyé !',
+      description: 'Merci de vérifier votre boite mail pour vous connecter.',
+      icon: 'i-heroicons-envelope-solid',
+      timeout: 60000,
+      color: 'green',
+    })
+  }
+  isLoading.value = false
   if (error) {
+    toast.add({
+      id: 'auth_notification',
+      title: 'Une erreur est survenue.',
+      description: error.message,
+      icon: 'i-heroicons-exclamation-triangle-20-solid',
+      timeout: 6000,
+      color: 'red',
+    })
     throw createError({
       statusCode: error.status,
       statusMessage: error.message

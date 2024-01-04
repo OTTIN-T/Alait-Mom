@@ -1,9 +1,13 @@
 <template>
   <NuxtPwaManifest />
+  <SpeedInsights />
   <NuxtPage />
+  <UNotifications />
 </template>
 
 <script setup lang="ts">
+import { SpeedInsights } from '@vercel/speed-insights/vue';
+
 // CONST
 const ogImageOptions = {
   title: 'Alait\'Mom',
