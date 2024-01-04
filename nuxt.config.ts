@@ -4,12 +4,26 @@ import { pwa } from './config/pwa.config'
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   debug: process.env.NODE_ENV_NUXT === 'development',
-  devtools: { enabled: true },
+  devtools: {
+    enabled: true,
+
+    timeline: {
+      enabled: true,
+    },
+  },
   devServer: {
-    host: 'alaitmom',
+    host: 'alait-mom',
     https: {
       key: './alaitmom-key.pem',
       cert: './alaitmom.pem',
+    },
+  },
+  runtimeConfig: {
+    public: {
+      NUXT_PUBLIC_FRONTEND_URL: process.env.NUXT_PUBLIC_FRONTEND_URL,
+    },
+    turnstile: {
+      secretKey: process.env.NUXT_TURNSTILE_SECRET_KEY,
     },
   },
   app: {
@@ -44,7 +58,7 @@ export default defineNuxtConfig({
     identity: {
       type: 'Organization',
     },
-    description: 'Comment timmer ses allaitements !',
+    description: "Tout ce qu'il faut pour suivre ses allaitements !",
   },
   delayHydration: {
     debug: process.env.NODE_ENV_NUXT === 'development',
@@ -72,6 +86,19 @@ export default defineNuxtConfig({
   image: {
     dir: 'public/',
   },
+  supabase: {
+    url: process.env.NUXT_PUBLIC_SUPABASE_URL,
+    key: process.env.NUXT_PUBLIC_SUPABASE_KEY,
+    serviceKey: process.env.SUPABASE_SERVICE_ROLE_KEY,
+    redirectOptions: {
+      login: '/',
+      callback: '/confirm',
+      exclude: ['/'],
+    },
+  },
+  turnstile: {
+    siteKey: process.env.TURNSTILE_SITE_KEY,
+  },
   modules: [
     '@vueuse/nuxt',
     '@nuxtjs/google-fonts',
@@ -91,5 +118,7 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     'nuxt-auth-utils',
     'nuxt-lazy-hydrate',
+    '@nuxtjs/supabase',
+    '@nuxtjs/turnstile',
   ],
 })

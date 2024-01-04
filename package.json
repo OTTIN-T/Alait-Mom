@@ -16,7 +16,11 @@
     "lint:fix": "eslint . --fix",
     "lighthouse": "npx unlighthouse --site http://localhost:3000/",
     "start:prod": "node .output/server/index.mjs",
-    "generate-pwa-assets": "pwa-assets-generator --preset minimal-2023 public/logo-no-bg.svg"
+    "generate-pwa-assets": "pwa-assets-generator --preset minimal-2023 public/logo-no-bg.svg",
+    "supa-start": "supabase start",
+    "supa-stop": "supabase stop",
+    "supa-type": "supabase gen types typescript",
+    "supa": "supabase"
   },
   "dependencies": {
     "nuxt-lazy-hydrate": "^1.0.0",
@@ -33,6 +37,8 @@
     "@nuxtjs/color-mode": "^3.3.2",
     "@nuxtjs/fontaine": "^0.4.1",
     "@nuxtjs/google-fonts": "^3.1.3",
+    "@nuxtjs/supabase": "^1.1.5",
+    "@nuxtjs/turnstile": "^0.6.3",
     "@vite-pwa/assets-generator": "^0.2.2",
     "@vite-pwa/nuxt": "^0.4.0",
     "@vueuse/nuxt": "^10.7.1",
@@ -49,6 +55,7 @@
     "nuxt-simple-robots": "3.1.10",
     "nuxt-simple-sitemap": "^4.2.0",
     "simple-git-hooks": "^2.9.0",
+    "supabase": "^1.127.3",
     "vitest-environment-nuxt": "^1.0.0",
     "vue": "3.4.0",
     "vue-router": "^4.2.5"

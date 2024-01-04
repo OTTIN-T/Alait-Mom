@@ -11,10 +11,10 @@ export const pwa: ModuleOptions = {
   useCredentials: true,
   manifest: {
     id: '/',
-    name: 'Alait\'Mom',
-    short_name: 'Alait\'Mom',
+    name: "Alait'Mom",
+    short_name: "Alait'Mom",
     lang: 'fr',
-    description: 'Comment timmer ses allaitements !',
+    description: "Tout ce qu'il faut pour suivre ses allaitements !",
     background_color: '#F3F6FC',
     theme_color: '#ffffff',
     orientation: 'landscape',

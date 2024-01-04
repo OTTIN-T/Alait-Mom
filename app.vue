@@ -1,17 +1,13 @@
 <template>
   <NuxtPwaManifest />
-  <NuxtLayout name="default">
-    <template #body>
-      <NuxtPage />
-    </template>
-  </NuxtLayout>
+  <NuxtPage />
 </template>
 
 <script setup lang="ts">
 // CONST
 const ogImageOptions = {
   title: 'Alait\'Mom',
-  description: 'Trouvez qui feat avec qui !',
+  description: 'Tout ce qu\'il faut pour suivre ses allaitements !',
 }
 
 // USE

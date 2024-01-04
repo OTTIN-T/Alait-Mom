@@ -21,8 +21,8 @@
           :description="description">
           <template #content>
             <BtnInstall v-if="header === 1" class="mx-auto" />
-            <HeroAuth v-if="header === 2" :form-type="FormTypeEnum.SIGNUP" class="mx-auto" />
-            <HeroAuth v-if="header === 3" :form-type="FormTypeEnum.LOGIN" class="mx-auto" />
+            <FormAuth v-if="header === 2" class="mx-auto" />
+            <FormAuth v-if="header === 3" class="mx-auto" label="Connecte toi !" />
           </template>
         </HeroTile>
       </div>
@@ -31,8 +31,6 @@
 </template>
 
 <script lang="ts" setup>
-import { FormTypeEnum } from '~/models/auth.model';
-
 // CONST
 const heroTileList: Array<{ header: string | number; title: string; description: string }> = [
   {

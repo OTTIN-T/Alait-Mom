@@ -5,7 +5,7 @@
 
 <script lang="ts" setup>
 // CONST
-const { $pwa } = useNuxtApp()
+const nuxtApp = useNuxtApp()
 
 // COMPUTED
 const btnProperty = computed((): {
@@ -15,7 +15,7 @@ const btnProperty = computed((): {
   disabled: boolean;
   class: string;
 } => {
-  if ($pwa?.isPWAInstalled) {
+  if (nuxtApp.$pwa?.isPWAInstalled) {
     return {
       icon: 'i-heroicons-check-circle-16-solid',
       label: 'Déjà installée !',
@@ -35,7 +35,7 @@ const btnProperty = computed((): {
 
 // FUNCTIONS
 function getInstallPrompt(): void {
-  $pwa?.install();
+  nuxtApp.$pwa?.install();
 };
 </script>
 

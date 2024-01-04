@@ -8,7 +8,7 @@
         <p class="mb-6 max-w-lg text-base text-my-gray-700 dark:text-my-gray-300 md:text-xl md:mb-10 lg:mb-12">
           Ajoutez facilement le nombre d'allaitement par jour, la durée et le sein utilisé.
         </p>
-        <HeroAuth :form-type="FormTypeEnum.SIGNUP" />
+        <FormAuth />
       </div>
       <!-- TODO replace image -->
       <NuxtImg src="/pwa/screenshot/desktop-1.png" alt="" class="inline-block h-full w-full max-w-[640px]" />
@@ -23,7 +23,6 @@
 
 <script lang="ts" setup>
 import type { ButtonSize } from '~/models/ui.model'
-import { FormTypeEnum } from '~/models/auth.model'
 
 // COMPUTED
 const isLargeScreen = useMediaQuery('(min-width: 1024px)')
@@ -36,8 +35,8 @@ const logoSize = computed((): {
   return { width, height }
 })
 
+// PROVIDERS
 provide<ButtonSize>('size', 'xl')
-
 </script>
 
 <style lang="sass" scoped>

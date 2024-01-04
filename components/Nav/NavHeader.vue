@@ -8,10 +8,7 @@
           Alait'Mom
         </ULink>
         <UContainer class="flex px-0 md:px-4">
-          <DelayHydration>
-            <HeroAuth v-for="(authType, index) in authFormList" :key="authType" :form-type="authType"
-              :class="{ 'mr-2 md:mr-5': index === 0 }" />
-          </DelayHydration>
+          <FormAuth />
         </UContainer>
         <ToggleTheme class="items-end ml-2" />
       </nav>
@@ -20,17 +17,6 @@
 </template>
 
 <script lang="ts" setup>
-import { FormTypeEnum } from '~/models/auth.model';
-
-// CONST
-const isSmallScreen = useMediaQuery('(max-width: 340px)')
-const authFormList = computed((): FormTypeEnum[] =>
-  isSmallScreen.value ? [
-    FormTypeEnum.LOGIN,
-  ] : [
-    FormTypeEnum.LOGIN,
-    FormTypeEnum.SIGNUP,
-  ])
 </script>
 
 <style lang="sass" scoped>

@@ -25,6 +25,7 @@
 </template>
 
 <script lang="ts" setup>
+// CONST
 const formatted = useDateFormat(useNow(), 'YYYY')
 </script>
 
