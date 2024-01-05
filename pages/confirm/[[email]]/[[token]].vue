@@ -17,7 +17,13 @@
           <UButton :color="hasError ? 'red' : 'green'" variant="solid"
             :icon="hasError ? 'i-heroicons-exclamation-triangle-20-solid' : 'i-heroicons-arrow-right-circle-16-solid'"
             :padded="false" :loading="isLoading" @click="onSubmit" type="submit" label="Activez votre compte"
-            class="w-1/4 mx-auto p-5 mb-10" />
+            class="w-auto mx-auto p-5 my-10" />
+        </UContainer>
+
+        <UContainer class="flex flex-col lg:px-4 mt-6">
+          <h2 class="mt-10">Une erreur est survenue ?</h2>
+          <UButton label="Renvoyer un email" color="my-primary" class="dark:text-white w-auto mx-auto p-5 my-10"
+            icon="i-heroicons-envelope-solid" :loading="isSendingEmail" variant="solid" @click="resendEmail" />
         </UContainer>
       </section>
     </template>
@@ -32,23 +38,26 @@ import type { RouteParams } from 'vue-router';
 
 // CONST
 const user = useSupabaseUser()
-const supabase = useSupabaseClient()
+const { auth } = useSupabaseClient()
 const emailStore = useState<string>('email')
 const route = useRoute()
+const runtimeConfig = useRuntimeConfig()
+const toast = useToast()
 const token = ref<string>('')
 const isLoading = ref<boolean>(false)
+const isSendingEmail = ref<boolean>(false)
 const hasError = ref<boolean>(false)
 const haveParams = ref<boolean>(false)
 
 // WATCHERS
 watch(() => route.params, (value: RouteParams) => {
   haveParams.value = Boolean(value.token.length && value.email.length)
-  if (haveParams) {
+  if (haveParams.value) {
     token.value = String(value.token)
     emailStore.value = String(value.email)
   }
 
-  if (!haveParams) {
+  if (!haveParams.value) {
     goToDashboard()
   }
 },
@@ -68,7 +77,7 @@ async function onSubmit(): Promise<void> {
   const {
     data,
     error,
-  } = await supabase.auth.verifyOtp({
+  } = await auth.verifyOtp({
     email: emailStore.value,
     token: token.value,
     type: 'email',
@@ -90,6 +99,42 @@ async function onSubmit(): Promise<void> {
 async function goToDashboard(): Promise<void> {
   if (user.value) {
     await navigateTo('/dashboard/home')
+  }
+}
+
+async function resendEmail(): Promise<void> {
+  isSendingEmail.value = true
+  const { error } = await auth.resend({
+    type: 'signup',
+    email: emailStore.value,
+    options: {
+      emailRedirectTo: `${runtimeConfig.public.NUXT_PUBLIC_FRONTEND_URL}/confirm`,
+    }
+  })
+  if (!error) {
+    toast.add({
+      id: 'auth_notification',
+      title: 'Email envoyé !',
+      description: 'Merci de vérifier votre boite mail pour vous connecter.',
+      icon: 'i-heroicons-envelope-solid',
+      timeout: 60000,
+      color: 'green',
+    })
+  }
+  isSendingEmail.value = false
+  if (error) {
+    toast.add({
+      id: 'auth_notification',
+      title: 'Une erreur est survenue.',
+      description: error.message,
+      icon: 'i-heroicons-exclamation-triangle-20-solid',
+      timeout: 6000,
+      color: 'red',
+    })
+    throw createError({
+      statusCode: error.status,
+      statusMessage: error.message
+    })
   }
 }
 </script>
