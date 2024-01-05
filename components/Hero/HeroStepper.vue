@@ -41,7 +41,7 @@ const heroTileList: Array<{ header: string | number; title: string; description:
   {
     header: 2,
     title: "Inscris toi",
-    description: "Procède à une rapide inscription pour accéder à l'ensemble des fonctionnalités !"
+    description: "Procède à une rapide inscription avec juste ton email pour accéder à l'ensemble des fonctionnalités !"
   },
   {
     header: 3,

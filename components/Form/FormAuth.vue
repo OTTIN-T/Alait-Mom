@@ -66,7 +66,7 @@ async function onSubmit(authEvent: FormSubmitEvent<AuthSchemaType>): Promise<voi
   const { error } = await auth.signInWithOtp({
     email: authEvent.data.email,
     options: {
-      emailRedirectTo: `${runtimeConfig.public.NUXT_PUBLIC_FRONTEND_URL}/confirm/${authEvent.data.email}`,
+      emailRedirectTo: `${runtimeConfig.public.NUXT_PUBLIC_FRONTEND_URL}/confirm`,
       captchaToken: authEvent.data.captchaToken,
     }
   })

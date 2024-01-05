@@ -1,11 +1,11 @@
 <template>
   <NuxtLayout name="default">
     <template #body>
-      <section v-if="!haveParams" class="h-screen flex flex-col justify-center">
+      <section v-if="!haveParams" class="h-dvh flex flex-col justify-center">
         <h1 class="text-xl text-center">Redirection en cours...</h1>
         <USkeleton class="h-4 w-1/2 mx-auto mt-3" />
       </section>
-      <section v-if="haveParams" class="h-screen flex flex-col justify-center">
+      <section v-if="haveParams" class="h-dvh flex flex-col justify-center">
         <h1 class="text-xl text-center mb-5">Verification et activation de votre compte</h1>
         <UContainer class="border rounded-2xl flex flex-col lg:px-4 mt-6">
           <div class="flex">
