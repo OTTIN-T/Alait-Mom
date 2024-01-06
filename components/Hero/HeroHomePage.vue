@@ -17,7 +17,7 @@
       <NuxtImg src="/logo-no-bg.svg" alt="Logo alait'mom" :width="logoSize.width" :height="logoSize.height"
         class="mx-auto mt-5 lg:mt-16" loading="lazy" />
     </ClientOnly>
-    <HeroStepper />
+    <LazyHeroStepper />
   </div>
 </template>
 

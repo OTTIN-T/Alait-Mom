@@ -3,7 +3,8 @@
     <UDivider class="pb-5" />
     <div class="flex flex-row justify-between md:items-center">
       <div class="flex flex-col sm:flex-row">
-        <ULink to="/" active-class="text-my-primary" class="text-my-primary font-bold pr-6 sm:mb-0 mb-2"
+        <ULink to="/" active-class="text-my-primary-700 dark:text-my-primary"
+          class="text-my-primary font-bold pr-6 sm:mb-0 mb-2"
           inactive-class="text-my-gray-500 dark:text-my-gray-400 hover:text-my-secondary">
           Alait'Mom
         </ULink>
