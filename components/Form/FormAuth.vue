@@ -15,7 +15,7 @@
           </UButton>
         </div>
         <UDivider label="Autre" />
-        <BtnGoogleAuth :disabled="!hasCaptchaToken" class="w-1/4 mx-auto" />
+        <BtnGoogleAuth :disabled="!hasCaptchaToken" class="sm:w-1/4 w-1/3 mx-auto" />
       </UForm>
     </template>
     <template #footer>

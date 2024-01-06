@@ -71,6 +71,6 @@ export const pwa: ModuleOptions = {
   },
   workbox: {
     sourcemap: true,
-    globPatterns: process.env.NODE_ENV_NUXT === 'development' ? [] : ['**/*.{js,css,html,png,jpg,svg,ico,webp}'],
+    globPatterns: process.env.NODE_ENV_NUXT === 'development' ? [] : ['**/*.{js,css,html,png,jpg,svg,ico,webp,json,_payload.json}', '_nuxt/builds/**/*.json', '**/_payload.json'],
   },
 }

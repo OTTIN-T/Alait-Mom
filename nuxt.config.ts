@@ -7,7 +7,6 @@ export default defineNuxtConfig({
   debug: process.env.NODE_ENV_NUXT === 'development',
   devtools: {
     enabled: true,
-
     timeline: {
       enabled: true,
     },
@@ -62,7 +61,7 @@ export default defineNuxtConfig({
     },
   },
   site: {
-    url: 'https://alaitmom.com',
+    url: 'https://alait-mom.vercel.com',
     autoI18n: true,
     name: "Alait'Mom",
     defaultLocale: 'fr',
@@ -79,6 +78,9 @@ export default defineNuxtConfig({
   security: {
     headers: {
       crossOriginEmbedderPolicy: process.env.NODE_ENV === 'development' ? 'unsafe-none' : 'credentialless',
+      contentSecurityPolicy: {
+        'img-src': ["'self'", 'data:', 'https:'],
+      },
     },
   },
   ui: {

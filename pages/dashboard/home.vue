@@ -1,5 +1,5 @@
 <template>
-  <NuxtLayout name="default">
+  <NuxtLayout name="connected">
     <template #body>
       <div>
         dashboard
@@ -12,4 +12,11 @@
 </style>
 
 <script lang="ts" setup>
+// CONST
+const { auth } = useSupabaseClient();
+
+// LIFE CYCLE
+onMounted(async () => {
+  await auth.getSession();
+})
 </script>
