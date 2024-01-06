@@ -7,10 +7,10 @@
           <UInput v-model="state.email" autocomplete="email" />
         </UFormGroup>
         <div class="flex justify-between">
-          <UButton class="dark:text-white" @click="showDialog" color="red">
+          <UButton class="text-black" @click="showDialog" color="red">
             Fermer
           </UButton>
-          <UButton :loading="isLoading" :disabled="!hasCaptchaToken" type="submit" class="dark:text-white">
+          <UButton :loading="isLoading" :disabled="!hasCaptchaToken" type="submit" class="text-black">
             Se connecter
           </UButton>
         </div>

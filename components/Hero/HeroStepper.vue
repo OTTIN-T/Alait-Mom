@@ -2,7 +2,7 @@
   <section class="relative">
     <div class="mx-auto max-w-7xl px-5 pt-5 md:px-10 lg:pt-16">
       <div class="mx-auto w-full max-w-3xl text-center mb-16">
-        <p class="uppercase text-my-accent">
+        <p class="uppercase text-my-accent-700 dark:text-my-accent">
           3 étapes faciles
         </p>
         <h2 class="text-2xl font-semibold md:text-4xl">

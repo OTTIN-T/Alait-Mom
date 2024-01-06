@@ -1,6 +1,6 @@
 <template>
   <div>
-    <UButton color="my-primary" :label="label" class="dark:text-white" :size="size" @click="showDialog" />
+    <UButton color="my-primary" :label="label" class="text-black" :size="size" @click="showDialog" />
 
     <UModal v-model="isOpened" prevent-close>
       <UCard :ui="{ ring: '', divide: 'divide-y divide-gray-100 dark:divide-gray-800' }">
@@ -9,7 +9,8 @@
             <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-white">
               {{ title }}
             </h3>
-            <UButton color="gray" variant="ghost" icon="i-heroicons-x-mark-20-solid" class="-my-1" @click="showDialog" />
+            <UButton color="my-gray" variant="ghost" icon="i-heroicons-x-mark-20-solid" class="-my-1"
+              @click="showDialog" />
           </div>
         </template>
 

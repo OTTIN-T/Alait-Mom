@@ -21,7 +21,7 @@ const btnProperty = computed((): {
       label: 'Déjà installée !',
       color: 'green',
       disabled: true,
-      class: 'dark:text-black'
+      class: 'text-black'
     }
   }
   return {
@@ -29,7 +29,7 @@ const btnProperty = computed((): {
     label: 'Installe moi !',
     color: 'my-primary',
     disabled: false,
-    class: 'dark:text-white'
+    class: 'text-black'
   }
 })
 

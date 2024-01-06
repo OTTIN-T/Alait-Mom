@@ -1,5 +1,5 @@
 <template>
-  <UButton class="mt-3 dark:text-white" icon="i-simple-icons-google" block label="Google" :disabled="props.disabled"
+  <UButton class="mt-3 text-black" icon="i-simple-icons-google" block label="Google" :disabled="props.disabled"
     @click="auth.signInWithOAuth({ provider: 'google', options: { redirectTo } })" />
 </template>
 

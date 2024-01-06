@@ -10,19 +10,19 @@
         <UContainer class="border rounded-2xl flex flex-col lg:px-4 mt-6">
           <div class="flex">
             <UContainer v-for=" tokenSplitted  in  tokenSplittedList " :key="tokenSplitted"
-              class="text-center md:text-xl bg-my-accent md:rounded-xl rounded-lg lg:p-10 md:p-6 p-3 lg:mx-5 md:mx-2 mx-1 my-10">
+              class="text-center text-black md:text-xl bg-my-accent md:rounded-xl rounded-lg lg:p-10 md:p-6 p-3 lg:mx-5 md:mx-2 mx-1 my-10">
               {{ tokenSplitted }}
             </UContainer>
           </div>
           <UButton :color="hasError ? 'red' : 'green'" variant="solid"
             :icon="hasError ? 'i-heroicons-exclamation-triangle-20-solid' : 'i-heroicons-arrow-right-circle-16-solid'"
             :padded="false" :loading="isLoading" @click="onSubmit" type="submit" label="Activez votre compte"
-            class="w-auto mx-auto p-5 my-10" />
+            class="w-auto mx-auto p-5 my-10 text-black" />
         </UContainer>
 
         <UContainer class="flex flex-col lg:px-4 mt-6">
           <h2 class="mt-10">Une erreur est survenue ?</h2>
-          <UButton label="Renvoyer un email" color="my-primary" class="dark:text-white w-auto mx-auto p-5 my-10"
+          <UButton label="Renvoyer un email" color="my-primary" class="text-black w-auto mx-auto p-5 my-10"
             icon="i-heroicons-envelope-solid" :loading="isSendingEmail" variant="solid" @click="resendEmail" />
         </UContainer>
       </section>

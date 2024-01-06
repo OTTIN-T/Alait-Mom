@@ -1,5 +1,6 @@
 import process from 'node:process'
 import { pwa } from './config/pwa.config'
+import { nitro } from './config/nitro.config'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -30,8 +31,14 @@ export default defineNuxtConfig({
     head: {
       charset: 'utf-8',
       viewport: 'width=device-width, initial-scale=1',
+      title: "Alait'Mom",
     },
+    keepalive: true,
   },
+  experimental: {
+    typedPages: true,
+  },
+  nitro,
   vue: {
     defineModel: true,
     propsDestructure: true,
