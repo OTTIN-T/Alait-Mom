@@ -1,6 +1,6 @@
 <template>
   <NuxtPwaManifest />
-  <SpeedInsights />
+  <SpeedInsights type="text/partytown" />
   <NuxtPage />
   <UNotifications />
 </template>

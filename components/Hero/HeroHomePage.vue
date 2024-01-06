@@ -11,7 +11,7 @@
         <FormAuth />
       </div>
       <!-- TODO replace image -->
-      <NuxtImg src="/pwa/screenshot/desktop-1.png" alt="" class="inline-block h-full w-full max-w-[640px]" />
+      <NuxtImg src="/pwa/screenshot/desktop-1.png" alt="" class="inline-block h-full w-full max-w-[640px]" preload />
     </div>
     <ClientOnly>
       <NuxtImg src="/logo-no-bg.svg" alt="Logo alait'mom" :width="logoSize.width" :height="logoSize.height"

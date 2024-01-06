@@ -34,15 +34,20 @@ export default defineNuxtConfig({
       title: "Alait'Mom",
     },
     keepalive: true,
+    script: [
+      { src: 'https://alait-mom.vercel.app/_vercel/insights/script.js', defer: true, type: 'text/partytown' },
+      { src: 'https://alait-mom.vercel.app/_vercel/speed-insights/script.js', defer: true, type: 'text/partytown' },
+    ],
   },
   experimental: {
     typedPages: true,
   },
-  nitro,
   vue: {
     defineModel: true,
     propsDestructure: true,
   },
+  nitro,
+  pwa,
   googleFonts: {
     families: {
       Montserrat: true,
@@ -76,7 +81,6 @@ export default defineNuxtConfig({
       crossOriginEmbedderPolicy: process.env.NODE_ENV === 'development' ? 'unsafe-none' : 'credentialless',
     },
   },
-  pwa,
   ui: {
     global: true,
     icons: ['heroicons', 'simple-icons'],
@@ -127,5 +131,6 @@ export default defineNuxtConfig({
     'nuxt-lazy-hydrate',
     '@nuxtjs/supabase',
     '@nuxtjs/turnstile',
+    '@nuxtjs/partytown',
   ],
 })
