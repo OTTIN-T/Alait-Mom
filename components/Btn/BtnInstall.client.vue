@@ -1,6 +1,6 @@
 <template>
   <UButton :icon="btnProperty.icon" :color="btnProperty.color" variant="solid" :label="btnProperty.label" size="xl"
-    :class="btnProperty.class" :disabled="btnProperty.disabled" @click="getInstallPrompt" />
+    class="text-black" :disabled="btnProperty.disabled" @click="getInstallPrompt" />
 </template>
 
 <script lang="ts" setup>
@@ -13,7 +13,6 @@ const btnProperty = computed((): {
   label: string;
   color: string;
   disabled: boolean;
-  class: string;
 } => {
   if (nuxtApp.$pwa?.isPWAInstalled) {
     return {
@@ -21,7 +20,6 @@ const btnProperty = computed((): {
       label: 'Déjà installée !',
       color: 'green',
       disabled: true,
-      class: 'text-black'
     }
   }
   return {
@@ -29,7 +27,6 @@ const btnProperty = computed((): {
     label: 'Installe moi !',
     color: 'my-primary',
     disabled: false,
-    class: 'text-black'
   }
 })
 

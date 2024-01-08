@@ -103,10 +103,11 @@ export default defineNuxtConfig({
     url: process.env.NUXT_PUBLIC_SUPABASE_URL,
     key: process.env.NUXT_PUBLIC_SUPABASE_KEY,
     serviceKey: process.env.SUPABASE_SERVICE_ROLE_KEY,
+    redirect: true,
     redirectOptions: {
       login: '/',
-      callback: '/confirm',
-      exclude: ['/', '/confirm*'],
+      callback: '/confirm/*',
+      exclude: ['/', '/confirm/*', '/cgu', '/rgpd'],
     },
   },
   turnstile: {

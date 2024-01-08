@@ -4,7 +4,7 @@
       <h3 class="mb-3">Inscrit toi ou connecte toi avec simplement ton email</h3>
       <UForm :schema="authSchema" :state="state" class="space-y-4" @submit="onSubmit">
         <UFormGroup label="Email" name="email">
-          <UInput v-model="state.email" autocomplete="email" />
+          <UInput v-model.trim="state.email" autocomplete="email" />
         </UFormGroup>
         <div class="flex justify-between">
           <UButton class="text-black" @click="showDialog" color="red">
@@ -28,6 +28,7 @@
 
 <script lang="ts" setup>
 import type { FormSubmitEvent } from '#ui/types';
+import type { NavigationFailure, RouteLocationRaw } from 'vue-router/auto';
 import { useAuth } from "~/composables/useAuth";
 import type { AuthSchemaType } from '~/models/auth.model';
 
@@ -60,7 +61,7 @@ watch(() => state.captchaToken, (value) => {
 })
 
 // FUNCTIONS
-async function onSubmit(authEvent: FormSubmitEvent<AuthSchemaType>): Promise<void> {
+async function onSubmit(authEvent: FormSubmitEvent<AuthSchemaType>): Promise<boolean | void | RouteLocationRaw | NavigationFailure> {
   isLoading.value = true
   emailStore.value = authEvent.data.email
   const { error } = await auth.signInWithOtp({
@@ -70,6 +71,8 @@ async function onSubmit(authEvent: FormSubmitEvent<AuthSchemaType>): Promise<voi
       captchaToken: authEvent.data.captchaToken,
     }
   })
+  isLoading.value = false
+  isOpen.value = false
   if (!error) {
     toast.add({
       id: 'auth_notification',
@@ -79,8 +82,8 @@ async function onSubmit(authEvent: FormSubmitEvent<AuthSchemaType>): Promise<voi
       timeout: 60000,
       color: 'green',
     })
+    await navigateTo('/confirm/otp')
   }
-  isLoading.value = false
   if (error) {
     toast.add({
       id: 'auth_notification',

@@ -30,6 +30,7 @@ export default <Partial<Config>>{
         'my-secondary': { ...colors.violet, DEFAULT: colors.violet[500] },
         'my-accent': { ...colors.blue, DEFAULT: colors.blue[500] },
         'my-gray': { ...colors.slate, DEFAULT: colors.slate[500] },
+        'my-surface-dark': '#0F172A',
       },
     },
   },

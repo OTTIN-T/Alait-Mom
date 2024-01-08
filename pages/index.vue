@@ -7,15 +7,17 @@
 </template>
 
 <script lang="ts" setup>
+import type { NavigationFailure, RouteLocationRaw } from '#vue-router';
+
 // CONST
 const { auth } = useSupabaseClient();
 const { beforeResolve } = useRouter();
 
 // FUNCTIONS
-async function redirectIfSession() {
+async function redirectIfSession(): Promise<boolean | void | RouteLocationRaw | NavigationFailure> {
   const session = await auth.getSession();
-  if (session) {
-    await navigateTo("/dashboard/home");
+  if (!!session.data.session) {
+    return navigateTo("/dashboard/home");
   }
 }
 
