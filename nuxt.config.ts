@@ -45,6 +45,9 @@ export default defineNuxtConfig({
     defineModel: true,
     propsDestructure: true,
   },
+  imports: {
+    dirs: ['composables/**'],
+  },
   nitro,
   pwa,
   googleFonts: {
@@ -85,7 +88,7 @@ export default defineNuxtConfig({
   },
   ui: {
     global: true,
-    icons: ['heroicons', 'simple-icons'],
+    icons: ['heroicons', 'simple-icons', 'fluent-emoji-high-contrast', 'lucide'],
   },
   tailwindcss: {
     cssPath: '~/assets/css/main.css',

@@ -12,6 +12,7 @@ export interface Database {
       breastfeeding: {
         Row: {
           breast: Database["public"]["Enums"]["breast"]
+          children_id: number | null
           created_at: string
           description: string | null
           duration: string
@@ -20,14 +21,16 @@ export interface Database {
         }
         Insert: {
           breast: Database["public"]["Enums"]["breast"]
+          children_id?: number | null
           created_at?: string
           description?: string | null
           duration: string
           id?: number
-          profile_id: string
+          profile_id?: string
         }
         Update: {
           breast?: Database["public"]["Enums"]["breast"]
+          children_id?: number | null
           created_at?: string
           description?: string | null
           duration?: string
@@ -35,6 +38,13 @@ export interface Database {
           profile_id?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "breastfeeding_children_id_fkey"
+            columns: ["children_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "breastfeeding_profile_id_fkey"
             columns: ["profile_id"]
@@ -55,7 +65,7 @@ export interface Database {
           created_at?: string
           id?: number
           name: string
-          profile_id: string
+          profile_id?: string
         }
         Update: {
           created_at?: string
@@ -81,7 +91,7 @@ export interface Database {
         }
         Insert: {
           created_at?: string
-          id: string
+          id?: string
           user_name?: string | null
         }
         Update: {

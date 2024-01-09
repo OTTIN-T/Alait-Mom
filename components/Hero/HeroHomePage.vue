@@ -36,7 +36,7 @@ const logoSize = computed((): {
 })
 
 // PROVIDERS
-provide<ButtonSize>('size', 'xl')
+provide<ButtonSize>('modal-size-btn', 'xl')
 </script>
 
 <style lang="sass" scoped>

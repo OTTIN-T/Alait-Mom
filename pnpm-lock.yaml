@@ -22,9 +22,15 @@ devDependencies:
   '@antfu/eslint-config':
     specifier: ^2.6.1
     version: 2.6.1(@vue/compiler-sfc@3.4.0)(eslint@8.56.0)(typescript@5.3.3)
+  '@iconify-json/fluent-emoji-high-contrast':
+    specifier: ^1.1.15
+    version: 1.1.15
   '@iconify-json/heroicons':
     specifier: ^1.1.19
     version: 1.1.19
+  '@iconify-json/lucide':
+    specifier: ^1.1.152
+    version: 1.1.152
   '@iconify-json/simple-icons':
     specifier: ^1.1.86
     version: 1.1.86
@@ -1881,6 +1887,12 @@ packages:
       '@iconify/types': 2.0.0
     dev: true
 
+  /@iconify-json/fluent-emoji-high-contrast@1.1.15:
+    resolution: {integrity: sha512-ZMwr2RbuM6Zagse2kt5kIvVYKVgzedwRSNb9hoqUCemK3kTL/w+cE/kzY4JtIFvP+maFywVWRJg3P1v+x1RF5w==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: true
+
   /@iconify-json/heroicons@1.1.19:
     resolution: {integrity: sha512-uW2F9vdGll59W21ocBl+wR4Ve+/1CsmzBqPTuOaR3CbKzqnJKwzGASvC4Op0uTieFVWfBaevnzcRxwNo73J29g==}
     dependencies:
@@ -1889,6 +1901,12 @@ packages:
 
   /@iconify-json/logos@1.1.42:
     resolution: {integrity: sha512-/f+frtPm3m3Z30oy8Pk+QqRDkbmAiIaWGPl5CmsCXm15MVfvw9a/V/gD7WzdyuSGAZcFuQaqbHXj92y/n+2ifg==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: true
+
+  /@iconify-json/lucide@1.1.152:
+    resolution: {integrity: sha512-ZsCJqjCR5PDBsaNAN4abTI8M2ODPZCL/pLjru/WRLKy3BJu4OMmB8erc/xVuuceoXd8plD7X/hFeqC7hECWbWg==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: true
@@ -8435,6 +8453,7 @@ packages:
   /mimic-fn@2.1.0:
     resolution: {integrity: sha512-OqbOk5oEQeAZ8WXWydlu9HJjz9WVdEIvamMCcXmuqUYjTknH/sqsWvhQ3vgwKFRR1HpjvNBKQ37nbJgYzGqGcg==}
     engines: {node: '>=6'}
+    requiresBuild: true
     dev: true
 
   /mimic-fn@4.0.0:
@@ -8620,6 +8639,7 @@ packages:
 
   /napi-wasm@1.1.0:
     resolution: {integrity: sha512-lHwIAJbmLSjF9VDRm9GoVOy9AGp3aIvkjv+Kvz9h16QR3uSVYH78PNQUnT2U4X53mhlnV2M7wrhibQ3GHicDmg==}
+    requiresBuild: true
     dev: true
 
   /natural-compare-lite@1.4.0:

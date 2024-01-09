@@ -19,7 +19,7 @@
     "generate-pwa-assets": "pwa-assets-generator --preset minimal-2023 public/logo-no-bg.svg",
     "supa-start": "supabase start",
     "supa-stop": "supabase stop",
-    "supa-type": "supabase gen types typescript",
+    "supa-type": "npx supabase gen types typescript --schema public > models/database.types.ts --project-id",
     "supa": "supabase"
   },
   "dependencies": {
@@ -30,7 +30,9 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.6.1",
+    "@iconify-json/fluent-emoji-high-contrast": "^1.1.15",
     "@iconify-json/heroicons": "^1.1.19",
+    "@iconify-json/lucide": "^1.1.152",
     "@iconify-json/simple-icons": "^1.1.86",
     "@nuxt/devtools": "^1.0.6",
     "@nuxt/image": "^1.1.0",

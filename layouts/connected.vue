@@ -4,6 +4,7 @@
   </ClientOnly>
   <main>
     <slot name="body" />
+    <BtnAddBreastfeeding />
   </main>
   <LazyNavFooter />
 </template>

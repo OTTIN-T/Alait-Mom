@@ -28,8 +28,8 @@ async function redirectIfSession(): Promise<boolean | void | RouteLocationRaw | 
 onMounted(() => {
   redirectIfSession()
 })
-beforeResolve(() => {
-  redirectIfSession()
+beforeResolve((to, _from) => {
+  to.path === "/" && redirectIfSession();
 })
 </script>
 

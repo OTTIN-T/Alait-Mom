@@ -29,7 +29,6 @@
 <script lang="ts" setup>
 import type { FormSubmitEvent } from '#ui/types';
 import type { NavigationFailure, RouteLocationRaw } from 'vue-router/auto';
-import { useAuth } from "~/composables/useAuth";
 import type { AuthSchemaType } from '~/models/auth.model';
 
 interface FormAuthPropOptions {
