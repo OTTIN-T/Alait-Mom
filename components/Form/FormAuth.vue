@@ -44,7 +44,7 @@ const toast = useToast()
 const { auth } = useSupabaseClient()
 const runtimeConfig = useRuntimeConfig()
 const { authSchema } = useAuth()
-const emailStore = useState<string>('email')
+const emailCookie = useCookie<string>('email', { watch: true, secure: true, sameSite: true, encode: (value) => btoa(value) })
 const isOpen = ref<boolean>(false)
 const hasCaptchaToken = ref<boolean>(false)
 const isLoading = ref<boolean>(false)
@@ -63,7 +63,7 @@ watch(() => state.captchaToken, (value) => {
 // FUNCTIONS
 async function onSubmit(authEvent: FormSubmitEvent<AuthSchemaType>): Promise<boolean | void | RouteLocationRaw | NavigationFailure> {
   isLoading.value = true
-  emailStore.value = authEvent.data.email
+  emailCookie.value = authEvent.data.email
   const { error } = await auth.signInWithOtp({
     email: authEvent.data.email,
     options: {

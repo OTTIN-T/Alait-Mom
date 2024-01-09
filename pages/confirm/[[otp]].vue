@@ -8,7 +8,7 @@
       <section v-if="haveParams" class="h-dvh flex flex-col justify-center mt-10">
         <h1 class="text-xl text-center mb-5 mt-10">Verification et activation de votre compte</h1>
         <h2 class="text-center">
-          {{ emailStore ? `Rentrez le code reçu sur l'email ${emailStore}` : 'Rentrez le code reçu par email' }}
+          {{ emailCookie ? `Rentrez le code reçu sur l'email ${emailCookie}` : 'Rentrez le code reçu par email' }}
         </h2>
         <UContainer class="border rounded-2xl flex flex-col lg:px-4 mt-6 ">
           <UForm :schema="tokenOTPSchema" :state="stateTokenList" @submit="onSubmit">
@@ -66,7 +66,7 @@ import type { AuthSchemaType, TokenSchemaType } from '~/models/auth.model';
 // CONST
 const user = useSupabaseUser()
 const { auth } = useSupabaseClient()
-const emailStore = useState<string>('email')
+const emailCookie = useCookie<string>('email', { decode: (value) => atob(value) })
 const route = useRoute()
 const runtimeConfig = useRuntimeConfig()
 const toast = useToast()
@@ -77,7 +77,7 @@ const isSendingEmail = ref<boolean>(false)
 const hasError = ref<boolean>(false)
 const haveParams = ref<boolean>(false)
 const stateTokenList = ref<(number | undefined)[]>([undefined, undefined, undefined, undefined, undefined, undefined])
-const stateResend = ref({ email: emailStore.value })
+const stateResend = ref({ email: emailCookie.value })
 
 
 // WATCHERS
@@ -91,7 +91,6 @@ watch(() => route.params, (value: RouteParams) => {
     immediate: true
   }
 )
-
 
 watch(stateTokenList, (value) => {
   autoCompleteInput(value)
@@ -112,7 +111,7 @@ async function onSubmit(tokenEvent: FormSubmitEvent<TokenSchemaType>): Promise<v
     data,
     error,
   } = await auth.verifyOtp({
-    email: emailStore.value,
+    email: emailCookie.value,
     token: tokenEvent.data.join(''),
     type: 'email',
   })
@@ -159,8 +158,7 @@ async function goToDashboard(): Promise<void> {
 
 async function resendEmail(authEvent: FormSubmitEvent<Pick<AuthSchemaType, 'email'>>): Promise<void> {
   isSendingEmail.value = true
-  const { error } = await auth.resend({
-    type: 'signup',
+  const { error } = await auth.signInWithOtp({
     email: authEvent.data.email,
     options: {
       emailRedirectTo: `${runtimeConfig.public.NUXT_PUBLIC_FRONTEND_URL}/confirm`,

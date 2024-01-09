@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <header class="fixed w-screen z-50 bg-white dark:bg-my-surface-dark">
     <UContainer class="md:px-4 px-2">
       <nav class="flex justify-between items-center mt-2">
         <UPopover overlay :popper="{ placement: 'bottom-start', arrow: true }">
