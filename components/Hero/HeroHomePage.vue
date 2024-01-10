@@ -13,27 +13,14 @@
       <!-- TODO replace image -->
       <NuxtImg src="/pwa/screenshot/desktop-1.png" alt="" class="inline-block h-full w-full max-w-[640px]" preload />
     </div>
-    <ClientOnly>
-      <NuxtImg src="/logo-no-bg.svg" alt="Logo alait'mom" :width="logoSize.width" :height="logoSize.height"
-        class="mx-auto mt-5 lg:mt-16" loading="lazy" />
-    </ClientOnly>
+    <NuxtImg src="/logo-no-bg.svg" alt="Logo alait'mom" :width="200" :height="200" class="mx-auto mt-5 lg:mt-16"
+      loading="lazy" />
     <LazyHeroStepper />
   </div>
 </template>
 
 <script lang="ts" setup>
 import type { ButtonSize } from '~/models/ui.model'
-
-// COMPUTED
-const isLargeScreen = useMediaQuery('(min-width: 1024px)')
-const logoSize = computed((): {
-  width: number;
-  height: number;
-} => {
-  const width = isLargeScreen.value ? 200 : 100
-  const height = isLargeScreen.value ? 200 : 100
-  return { width, height }
-})
 
 // PROVIDERS
 provide<ButtonSize>('modal-size-btn', 'xl')

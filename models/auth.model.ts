@@ -1,12 +1,10 @@
 import { z } from 'zod'
-import { useAuth } from '~/composables/useAuth'
-
-const { authSchema, tokenOTPSchema } = useAuth()
+import type { AuthSchema, TokenOTPSchema } from './schema/auth.schema'
 
 export enum FormTypeEnum {
   LOGIN = 'login',
   SIGNUP = 'signup',
 }
 
-export type AuthSchemaType = z.output<typeof authSchema>
-export type TokenSchemaType = z.output<typeof tokenOTPSchema>
+export type AuthSchemaType = z.output<typeof AuthSchema>
+export type TokenSchemaType = z.output<typeof TokenOTPSchema>

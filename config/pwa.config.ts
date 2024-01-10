@@ -15,9 +15,9 @@ export const pwa: ModuleOptions = {
     short_name: "Alait'Mom",
     lang: 'fr',
     description: "Tout ce qu'il faut pour suivre ses allaitements !",
-    background_color: '#F3F6FC',
-    theme_color: '#ffffff',
-    orientation: 'landscape',
+    background_color: '#a855f7',
+    theme_color: '#e6e6e6',
+    orientation: 'portrait',
     display: 'fullscreen',
     protocol_handlers: [
       {

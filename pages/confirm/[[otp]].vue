@@ -11,7 +11,7 @@
           {{ emailCookie ? `Rentrez le code reçu sur l'email ${emailCookie}` : 'Rentrez le code reçu par email' }}
         </h2>
         <UContainer class="border rounded-2xl flex flex-col lg:px-4 mt-6 ">
-          <UForm :schema="tokenOTPSchema" :state="stateTokenList" @submit="onSubmit">
+          <UForm :schema="TokenOTPSchema" :state="stateTokenList" @submit="onSubmit">
             <div class="flex justify-center">
               <UInput v-for="(_, index) in  stateTokenList " :key="index" type="number" :autofocus="index === 0"
                 @input="focusInput(index)" min="0" max="9" v-model.trim.number="stateTokenList[index]"
@@ -32,7 +32,7 @@
         <UContainer class="flex flex-col lg:px-4 mt-16">
           <UDivider icon="i-heroicons-bug-ant" />
           <h2 class="mt-5">Une erreur est survenue ?</h2>
-          <UForm :schema="authSchema.pick({ email: true })" :state="stateResend" @submit="resendEmail">
+          <UForm :schema="AuthSchema.pick({ email: true })" :state="stateResend" @submit="resendEmail">
             <UFormGroup label="Saisissez votre email" name="email" class="mt-5" :ui="{
               label: { wrapper: 'justify-center' }
             }
@@ -62,6 +62,7 @@
 import type { FormSubmitEvent } from '#ui/types';
 import type { RouteParams } from 'vue-router';
 import type { AuthSchemaType, TokenSchemaType } from '~/models/auth.model';
+import { AuthSchema, TokenOTPSchema } from '~/models/schema/auth.schema';
 
 // CONST
 const user = useSupabaseUser()
@@ -70,7 +71,6 @@ const emailCookie = useCookie<string>('email', { decode: (value) => atob(value) 
 const route = useRoute()
 const runtimeConfig = useRuntimeConfig()
 const toast = useToast()
-const { authSchema, tokenOTPSchema } = useAuth()
 const { createProfile } = useProfile()
 const isLoading = ref<boolean>(false)
 const isSendingEmail = ref<boolean>(false)
