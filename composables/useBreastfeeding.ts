@@ -16,6 +16,7 @@ export const useBreastfeeding = (): UseBreastfeeding => {
     if (breastfeedingError.value) throw breastfeedingError.value
     return breastfeeding.value
   }
+
   return {
     createBreastfeeding,
   }

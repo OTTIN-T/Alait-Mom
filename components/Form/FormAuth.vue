@@ -2,7 +2,7 @@
   <ModalBase title="Authentification" :is-open="isOpen" :label="props.label" @show-dialog="showDialog">
     <template #content>
       <h3 class="mb-3">Inscrit toi ou connecte toi avec simplement ton email</h3>
-      <UForm :schema="authSchema" :state="state" class="space-y-4" @submit="onSubmit">
+      <UForm :schema="AuthSchema" :state="state" class="space-y-4" @submit="onSubmit">
         <UFormGroup label="Email" name="email">
           <UInput v-model.trim="state.email" autocomplete="email" />
         </UFormGroup>
@@ -30,6 +30,7 @@
 import type { FormSubmitEvent } from '#ui/types';
 import type { NavigationFailure, RouteLocationRaw } from 'vue-router/auto';
 import type { AuthSchemaType } from '~/models/auth.model';
+import { AuthSchema } from '~/models/schema/auth.schema';
 
 interface FormAuthPropOptions {
   label?: string;
@@ -42,7 +43,6 @@ const props = withDefaults(defineProps<FormAuthPropOptions>(), {
 const toast = useToast()
 const { auth } = useSupabaseClient()
 const runtimeConfig = useRuntimeConfig()
-const { authSchema } = useAuth()
 const emailCookie = useCookie<string>('email', { watch: true, secure: true, sameSite: true, encode: (value) => btoa(value) })
 const isOpen = ref<boolean>(false)
 const hasCaptchaToken = ref<boolean>(false)

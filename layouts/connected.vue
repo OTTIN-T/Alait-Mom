@@ -1,7 +1,5 @@
 <template>
-  <ClientOnly>
-    <NavHeaderConnected />
-  </ClientOnly>
+  <NavHeaderConnected />
   <main>
     <slot name="body" />
     <BtnAddBreastfeeding />
