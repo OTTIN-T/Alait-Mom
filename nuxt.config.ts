@@ -110,7 +110,7 @@ export default defineNuxtConfig({
     redirect: true,
     redirectOptions: {
       login: '/',
-      callback: '/confirm/*',
+      callback: '/confirm',
       exclude: ['/', '/confirm/*', '/cgu', '/rgpd'],
     },
   },
@@ -134,7 +134,6 @@ export default defineNuxtConfig({
     'nuxt-seo-experiments',
     '@nuxt/ui',
     '@nuxtjs/color-mode',
-    'nuxt-auth-utils',
     'nuxt-lazy-hydrate',
     '@nuxtjs/supabase',
     '@nuxtjs/turnstile',
