@@ -33,6 +33,8 @@
     "@iconify-json/fluent-emoji-high-contrast": "^1.1.15",
     "@iconify-json/heroicons": "^1.1.19",
     "@iconify-json/lucide": "^1.1.153",
+    "@iconify-json/material-symbols-light": "^1.1.8",
+    "@iconify-json/mdi": "^1.1.64",
     "@iconify-json/simple-icons": "^1.1.87",
     "@nuxt/devtools": "^1.0.6",
     "@nuxt/image": "^1.2.0",

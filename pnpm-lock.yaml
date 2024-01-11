@@ -31,6 +31,12 @@ devDependencies:
   '@iconify-json/lucide':
     specifier: ^1.1.153
     version: 1.1.153
+  '@iconify-json/material-symbols-light':
+    specifier: ^1.1.8
+    version: 1.1.8
+  '@iconify-json/mdi':
+    specifier: ^1.1.64
+    version: 1.1.64
   '@iconify-json/simple-icons':
     specifier: ^1.1.87
     version: 1.1.87
@@ -2202,6 +2208,18 @@ packages:
 
   /@iconify-json/lucide@1.1.153:
     resolution: {integrity: sha512-Mw90zhok+ieryepp0kpcJmgcZvxvZ9hgxKptWjeYzzuVctt+092xDN/6KWjEQKynYaUkNYJEcLRc3FYLIdSJNw==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: true
+
+  /@iconify-json/material-symbols-light@1.1.8:
+    resolution: {integrity: sha512-V8p2l+KXRE0QLt6SxVko1JENmEk/peAtpUzDvC1v+9+0pmHQh1cj6scEDhImADDmELWvtg7HjZauXSHMASFCyQ==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: true
+
+  /@iconify-json/mdi@1.1.64:
+    resolution: {integrity: sha512-zGeo5TjhNFAY6FmSDBLAzDO811t77r6v/mDi7CAL9w5eXqKez6bIjk8R9AL/RHIeq44ALP4Ozr4lMqFTkHr7ug==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: true
