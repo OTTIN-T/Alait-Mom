@@ -45,6 +45,7 @@ import type { Tables } from '~/models/database.types';
 import { BreastfeedingSchema } from '~/models/schema/breastfeeding.schema';
 
 // CONST
+const { beforeEach } = useRouter();
 const toast = useToast()
 const { createBreastfeeding } = useBreastfeeding()
 const { getChildrenList } = useChildren()
@@ -107,17 +108,24 @@ async function initChildrenList() {
   isLoadingChildrenList.value = false
 }
 
-// LIFE CYCLE
-onMounted(async () => {
-  await initChildrenList()
-})
-onBeforeRouteLeave((_to, _from, next) => {
+function initForm(): void {
+  childrenList.value = [{ name: 'Pas d\'enfant enregistré', id: 0, created_at: '', profile_id: '' }]
   state.value = {
     breast: Breast.LEFT,
     duration: '00:00',
     description: undefined,
     children: childrenList.value[0],
   }
+}
+
+// LIFE CYCLE
+onMounted(async () => {
+  await nextTick()
+  initChildrenList()
+})
+beforeEach(async (_to, _from, next) => {
+  await initChildrenList()
+  initForm()
   next()
 })
 

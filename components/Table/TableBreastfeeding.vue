@@ -1,5 +1,5 @@
 <template>
-  <UTable :columns="columns" :rows="rows" :sort="sort" :loading="isLoading" :ui="{
+  <UTable :columns="columns" :rows="breastfeedingSlicedList" :sort="sort" :loading="isLoading" :ui="{
     td: {
       color: 'text-black dark:text-white max-w-'
     },
@@ -36,8 +36,8 @@
       </div>
     </template>
   </UTable>
-  <UPagination v-if="hasPagination" v-model="page" :page-count="pageCount" :total="breastfeedingList.length"
-    class="flex mx-auto" />
+  <UPagination v-if="hasPagination && breastfeedingSlicedList.length" v-model="page" :page-count="pageCount"
+    :total="breastfeedingList.length" class="flex mx-auto" />
 </template>
 
 <script lang="ts" setup>
@@ -57,6 +57,7 @@ const props = withDefaults(defineProps<TableBreastfeedingPropOptions>(), {
 });
 
 // CONST
+const { beforeEach } = useRouter()
 const { getBreastfeedingList } = useBreastfeeding()
 const isLoading = ref<boolean>(true)
 const breastfeedingList = ref<(Tables<'breastfeeding'>)[]>([])
@@ -96,7 +97,7 @@ const page = ref(1)
 const pageCount = 10
 
 // COMPUTED
-const rows = computed((): Tables<'breastfeeding'>[] => {
+const breastfeedingSlicedList = computed((): Tables<'breastfeeding'>[] => {
   return breastfeedingList.value.slice((page.value - 1) * pageCount, (page.value) * pageCount)
 })
 
@@ -114,6 +115,10 @@ async function initBreastfeedingList(): Promise<void> {
 onMounted(async () => {
   await nextTick()
   await initBreastfeedingList()
+})
+beforeEach(async (_to, _from, next) => {
+  await initBreastfeedingList()
+  next()
 })
 </script>
 
