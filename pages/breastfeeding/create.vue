@@ -51,7 +51,7 @@ const { getChildrenList } = useChildren()
 const isLoadingChildrenList = ref<boolean>(false)
 const childrenList = ref<(Tables<'children'>)[]>([{ name: 'Pas d\'enfant enregistré', id: 0, created_at: '', profile_id: '' }])
 const isSending = ref<boolean>(false)
-const state = reactive({
+const state = ref({
   breast: Breast.LEFT,
   duration: '00:00',
   description: undefined,
@@ -60,7 +60,7 @@ const state = reactive({
 
 // COMPUTED
 const hasCompletedForm = computed((): boolean => {
-  return state.breast !== undefined && state.duration !== undefined
+  return state.value.breast !== undefined && state.value.duration !== undefined
 })
 
 // FUNCTIONS
@@ -70,7 +70,7 @@ async function onSubmit(formEvent: FormSubmitEvent<BreastfeedingSchemaType>) {
     breast: formEvent.data.breast,
     duration: formEvent.data.duration,
     description: formEvent.data.description ?? undefined,
-    children_id: state.children.id === 0 ? undefined : formEvent.data.children?.id,
+    children_id: state.value.children.id === 0 ? undefined : formEvent.data.children?.id,
   })
   isSending.value = false
   if (result) {
@@ -110,6 +110,15 @@ async function initChildrenList() {
 // LIFE CYCLE
 onMounted(async () => {
   await initChildrenList()
+})
+onBeforeRouteLeave((_to, _from, next) => {
+  state.value = {
+    breast: Breast.LEFT,
+    duration: '00:00',
+    description: undefined,
+    children: childrenList.value[0],
+  }
+  next()
 })
 
 // PROVIDE

@@ -2,7 +2,7 @@
   <NavHeaderConnected />
   <main>
     <slot name="body" />
-    <BtnAddBreastfeeding />
+    <BtnAddBreastfeeding class="fixed bottom-5 right-5" />
   </main>
   <LazyNavFooter />
 </template>

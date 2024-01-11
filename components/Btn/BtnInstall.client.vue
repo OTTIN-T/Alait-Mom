@@ -30,7 +30,6 @@ const btnProperty = computed((): {
   color: string;
   disabled: boolean;
 } => {
-  console.log('nuxtApp.$pwa?.isPWAInstalled: ', nuxtApp.$pwa?.isPWAInstalled);
   if (nuxtApp.$pwa?.isPWAInstalled) {
     return {
       icon: 'i-heroicons-check-circle-16-solid',

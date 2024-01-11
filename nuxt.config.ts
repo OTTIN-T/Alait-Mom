@@ -84,6 +84,7 @@ export default defineNuxtConfig({
       contentSecurityPolicy: {
         'img-src': ["'self'", 'data:', 'https:'],
       },
+      xXSSProtection: '1; mode=block',
     },
   },
   ui: {
