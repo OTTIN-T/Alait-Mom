@@ -2,9 +2,7 @@
   <ModalBase label="Annuler" title="Annulation" :is-open="isOpen" @show-dialog="showDialog">
     <template #content>
       <div class="flex justify-center">
-        <span>
-          Êtes-vous sûr de vouloir annuler l'enregistrement de votre allaitement ?
-        </span>
+        <slot name="content" />
       </div>
     </template>
     <template #footer>

@@ -56,22 +56,37 @@ export interface Database {
       }
       children: {
         Row: {
+          birthdate: string | null
           created_at: string
+          description: string | null
+          gender: Database["public"]["Enums"]["gender"] | null
           id: number
           name: string
           profile_id: string
+          size: number | null
+          weight: number | null
         }
         Insert: {
+          birthdate?: string | null
           created_at?: string
+          description?: string | null
+          gender?: Database["public"]["Enums"]["gender"] | null
           id?: number
           name: string
           profile_id?: string
+          size?: number | null
+          weight?: number | null
         }
         Update: {
+          birthdate?: string | null
           created_at?: string
+          description?: string | null
+          gender?: Database["public"]["Enums"]["gender"] | null
           id?: number
           name?: string
           profile_id?: string
+          size?: number | null
+          weight?: number | null
         }
         Relationships: [
           {
@@ -91,7 +106,7 @@ export interface Database {
         }
         Insert: {
           created_at?: string
-          id?: string
+          id: string
           user_name?: string | null
         }
         Update: {
@@ -118,6 +133,7 @@ export interface Database {
     }
     Enums: {
       breast: "RIGHT" | "LEFT" | "BOTH"
+      gender: "O" | "M" | "F"
     }
     CompositeTypes: {
       [_ in never]: never

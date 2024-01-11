@@ -61,8 +61,7 @@
 <script lang="ts" setup>
 import type { FormSubmitEvent } from '#ui/types';
 import type { RouteParams } from 'vue-router';
-import type { AuthSchemaType, TokenSchemaType } from '~/models/auth.model';
-import { AuthSchema, TokenOTPSchema } from '~/models/schema/auth.schema';
+import { AuthSchema, TokenOTPSchema, type AuthSchemaType, type TokenSchemaType } from '~/models/schema/auth.schema';
 
 // CONST
 const user = useSupabaseUser()

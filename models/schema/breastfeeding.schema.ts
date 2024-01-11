@@ -14,3 +14,4 @@ export const BreastfeedingSchema = z.object({
     .optional(),
   description: z.string().trim().optional(),
 })
+export type BreastfeedingSchemaType = z.output<typeof BreastfeedingSchema>

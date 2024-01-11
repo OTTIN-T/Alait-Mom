@@ -24,6 +24,8 @@ import type { VerticalNavigationLink } from '@nuxt/ui/dist/runtime/types';
 // CONST
 const user = useSupabaseUser();
 const isOpen = ref(false)
+const avatarCookie = useCookie<string>('avatar_url', { watch: true, secure: true, sameSite: true, encode: (value) => btoa(value) })
+
 
 // COMPUTED
 const getAvatar = computed((): string => {
@@ -45,7 +47,17 @@ const links = computed((): VerticalNavigationLink[] => [
     },
     to: '/dashboard/profile'
   },
+  {
+    label: 'Allaitements',
+    icon: 'i-fluent-emoji-high-contrast-breast-feeding',
+    to: '/breastfeeding/list'
+  }
 ])
+
+// WATCH
+watch(() => getAvatar.value, (avatar) => {
+  avatarCookie.value = avatar
+})
 </script>
 
 <style lang="sass" scoped>

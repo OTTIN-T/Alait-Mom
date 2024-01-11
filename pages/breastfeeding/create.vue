@@ -7,7 +7,7 @@
           @submit="onSubmit">
           <ClientOnly>
             <template #fallback>
-              <SkeletonBreastfeeding />
+              <SkeletonFormBreastfeeding />
             </template>
             <UDivider icon="i-fluent-emoji-high-contrast-breast-feeding" />
             <FormBreastfeedingBreast v-model:breast="state.breast" />
@@ -23,7 +23,13 @@
             <FormBreastfeedingDescription v-model:description="state.description" />
 
             <UContainer class="flex justify-between pt-10">
-              <ModalCancelBreastfeeding />
+              <ModalCancel>
+                <template #content>
+                  <span>
+                    Êtes-vous sûr de vouloir annuler l'enregistrement de votre allaitement ?
+                  </span>
+                </template>
+              </ModalCancel>
               <UButton type="submit" class="text-black" :disabled="!hasCompletedForm">
                 Enregistrer
               </UButton>
@@ -40,9 +46,9 @@
 
 <script lang="ts" setup>
 import type { FormSubmitEvent } from '#ui/types';
-import { Breast, type BreastfeedingSchemaType } from '~/models/breastfeeding.model';
-import type { Tables } from '~/models/database.types';
-import { BreastfeedingSchema } from '~/models/schema/breastfeeding.schema';
+import { Breast } from '~/models/breastfeeding.model';
+import type { ChildrenSelectForm } from '~/models/children.model';
+import { BreastfeedingSchema, type BreastfeedingSchemaType } from '~/models/schema/breastfeeding.schema';
 
 // CONST
 const { beforeEach } = useRouter();
@@ -50,7 +56,7 @@ const toast = useToast()
 const { createBreastfeeding } = useBreastfeeding()
 const { getChildrenList } = useChildren()
 const isLoadingChildrenList = ref<boolean>(false)
-const childrenList = ref<(Tables<'children'>)[]>([{ name: 'Pas d\'enfant enregistré', id: 0, created_at: '', profile_id: '' }])
+const childrenList = ref<(ChildrenSelectForm)[]>([])
 const isSending = ref<boolean>(false)
 const state = ref({
   breast: Breast.LEFT,
@@ -105,11 +111,13 @@ async function initChildrenList() {
   if (result) {
     childrenList.value = result
   }
+  if (!result) {
+    childrenList.value = [{ name: 'Pas d\'enfant enregistré', id: 0 }]
+  }
   isLoadingChildrenList.value = false
 }
 
 function initForm(): void {
-  childrenList.value = [{ name: 'Pas d\'enfant enregistré', id: 0, created_at: '', profile_id: '' }]
   state.value = {
     breast: Breast.LEFT,
     duration: '00:00',
@@ -121,7 +129,9 @@ function initForm(): void {
 // LIFE CYCLE
 onMounted(async () => {
   await nextTick()
-  initChildrenList()
+  await initChildrenList()
+  initForm()
+
 })
 beforeEach(async (_to, _from, next) => {
   await initChildrenList()

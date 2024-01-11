@@ -6,3 +6,5 @@ export const AuthSchema = z.object({
 })
 
 export const TokenOTPSchema = z.array(z.number().max(9).nonnegative()).nonempty().length(6)
+export type AuthSchemaType = z.output<typeof AuthSchema>
+export type TokenSchemaType = z.output<typeof TokenOTPSchema>

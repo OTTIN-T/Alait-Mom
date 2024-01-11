@@ -1,7 +1,8 @@
-import type { Tables } from '~/models/database.types'
+import type { Tables, TablesInsert } from '~/models/database.types'
 
 interface UseChildren {
   getChildrenList: () => Promise<Tables<'children'>[] | null>
+  createChildren: (formValue: TablesInsert<'children'>) => Promise<TablesInsert<'children'>[] | null>
 }
 
 export const useChildren = (): UseChildren => {
@@ -17,7 +18,18 @@ export const useChildren = (): UseChildren => {
     return children.value
   }
 
+  async function createChildren(formValue: TablesInsert<'children'>): Promise<TablesInsert<'children'>[] | null> {
+    const { data: children, error: childrenError } = await useAsyncData('children', async () => {
+      const { data, error } = await client.from('children').insert([formValue]).select().returns<TablesInsert<'children'>[]>()
+      if (error) throw error
+      return data
+    })
+    if (childrenError.value) throw childrenError.value
+    return children.value
+  }
+
   return {
     getChildrenList,
+    createChildren,
   }
 }

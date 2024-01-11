@@ -29,8 +29,7 @@
 <script lang="ts" setup>
 import type { FormSubmitEvent } from '#ui/types';
 import type { NavigationFailure, RouteLocationRaw } from 'vue-router/auto';
-import type { AuthSchemaType } from '~/models/auth.model';
-import { AuthSchema } from '~/models/schema/auth.schema';
+import { AuthSchema, type AuthSchemaType } from '~/models/schema/auth.schema';
 
 interface FormAuthPropOptions {
   label?: string;

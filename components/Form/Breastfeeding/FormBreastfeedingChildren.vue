@@ -2,23 +2,23 @@
   <UFormGroup label="Relié un enfant" :ui="{
     label: { wrapper: 'justify-center' }
   }">
-    <USelectMenu :disabled="children.id === 0" :loading="isLoading" icon="i-heroicons-magnifying-glass-20-solid"
-      :options="childrenList" v-model="children.name" value-attribute="id" option-attribute="name" />
+    <USelectMenu :disabled="children?.id === 0" :loading="isLoading" icon="i-heroicons-magnifying-glass-20-solid"
+      :options="childrenList" v-model="children" option-attribute="name" />
   </UFormGroup>
 </template>
 
 <script lang="ts" setup>
-import type { Tables } from '~/models/database.types';
+import type { ChildrenSelectForm } from '~/models/children.model';
 
 interface FormBreastfeedingChildrenPropOptions {
   isLoading: boolean
-  childrenList: Tables<'children'>[]
+  childrenList: ChildrenSelectForm[]
 }
 defineProps<FormBreastfeedingChildrenPropOptions>()
 
 // MODEL
-const children = defineModel<Tables<'children'>>('children', {
-  required: true,
+const children = defineModel<ChildrenSelectForm>('children', {
+  required: false,
 })
 </script>
 

@@ -1,5 +1,5 @@
 <template>
-  <URadioGroup v-model="breast" legend="Sein utilisé(s)" color="my-primary" :options="breastOptions"
+  <URadioGroup v-model="breast" legend="Sein utilisé(s)" color="my-primary" :options="breastOptionList"
     class="justify-center" />
 </template>
 
@@ -10,7 +10,7 @@ import { Breast } from '~/models/breastfeeding.model';
 const breast = defineModel<Breast>('breast', {
   required: true,
 })
-const breastOptions = [{
+const breastOptionList = [{
   value: Breast.LEFT,
   label: 'Gauche'
 }, {
