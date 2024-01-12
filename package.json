@@ -63,7 +63,7 @@
     "simple-git-hooks": "^2.9.0",
     "supabase": "^1.132.1",
     "vitest-environment-nuxt": "^1.0.0",
-    "vue": "3.4.5",
+    "vue": "3.4.0",
     "vue-router": "^4.2.5"
   }
 }
