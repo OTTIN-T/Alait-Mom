@@ -2,7 +2,7 @@
   <NuxtLayout name="connected">
     <template #body>
       <UContainer as="section" class="pt-32 flex justify-around">
-        <UButton icon="i-heroicons-user-circle" class="text-black dark:text-white" label="Profil" to="/dashboard/profile"
+        <UButton icon="i-heroicons-user-circle" class="text-black dark:text-white" label="Profil" to="/profile/detail"
           color="my-primary" variant="soft" />
         <BtnAddChildren />
       </UContainer>

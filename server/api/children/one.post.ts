@@ -10,5 +10,13 @@ export default eventHandler(async (event) => {
   }
   const { data, error } = await client.from('children').insert([body.data]).select().returns<TablesInsert<'children'>[]>()
 
+  if (error) {
+    throw createError({
+      status: Number(error.code),
+      message: error.message,
+      statusCode: 500,
+    })
+  }
+
   return { data, error }
 })

@@ -91,13 +91,15 @@ async function onSubmit(formEvent: FormSubmitEvent<ChildrenSchemaType>): Promise
   if (error.value || data.value?.error) {
     toast.add({
       id: 'children_notification',
-      title: error.value?.name || 'Une erreur est survenue',
-      description: error.value?.message || data.value?.error?.message,
+      title: error.value?.name ?? 'Une erreur est survenue',
+      description: error.value?.message ?? String(data.value?.error),
       icon: 'i-heroicons-exclamation-triangle-20-solid',
       timeout: 6000,
       color: 'red',
     })
   }
+
+  isLoading.value = false
 }
 
 function initForm(): void {

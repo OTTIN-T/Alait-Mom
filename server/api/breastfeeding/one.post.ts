@@ -10,5 +10,13 @@ export default eventHandler(async (event) => {
   }
   const { data, error } = await client.from('breastfeeding').insert([body.data]).select().returns<TablesInsert<'breastfeeding'>[]>()
 
+  if (error) {
+    throw createError({
+      status: Number(error.code),
+      message: error.message,
+      statusCode: 500,
+    })
+  }
+
   return { data, error }
 })

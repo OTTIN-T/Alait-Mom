@@ -54,7 +54,7 @@ import { BreastfeedingSchema, type BreastfeedingSchemaType } from '~/models/sche
 const toast = useToast()
 const isLoadingChildrenList = ref<boolean>(false)
 const childrenList = ref<(ChildrenSelectForm)[]>([])
-const isSending = ref<boolean>(false)
+const isLoading = ref<boolean>(false)
 const state = ref({
   breast: Breast.LEFT,
   duration: '00:00',
@@ -78,7 +78,7 @@ async function onSubmit(formEvent: FormSubmitEvent<BreastfeedingSchemaType>) {
       children_id: formEvent.data.children?.id === 0 ? undefined : formEvent.data.children?.id,
     }
   })
-  isSending.value = pending.value
+  isLoading.value = pending.value
   if (data.value?.data) {
     toast.add({
       id: 'breastfeeding_notification',
@@ -95,13 +95,14 @@ async function onSubmit(formEvent: FormSubmitEvent<BreastfeedingSchemaType>) {
     toast.add({
       id: 'breastfeeding_notification',
       title: error.value?.name ?? 'Une erreur est survenue',
-      description: error.value?.message ?? data.value?.error?.message,
+      description: error.value?.message ?? String(data.value?.error),
       icon: 'i-heroicons-exclamation-triangle-20-solid',
       timeout: 6000,
       color: 'red',
     })
   }
 
+  isLoading.value = false
 }
 
 

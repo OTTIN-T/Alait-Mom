@@ -21,10 +21,11 @@
 <script lang="ts" setup>
 // CONST
 const isOpen = ref<boolean>(false)
+const router = useRouter()
 
 // FUNCTIONS
 async function onCancel(): Promise<void> {
-  await navigateTo('/dashboard/home')
+  router.back()
   showDialog()
 }
 
