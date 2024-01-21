@@ -2,8 +2,7 @@
   <NuxtLayout name="connected">
     <template #body>
       <UContainer as="section" class="pt-24 flex justify-around">
-        <UButton icon="i-heroicons-user-circle" class="mx-auto text-black dark:text-black" label="Modifier"
-          to="/profile/edit" color="my-primary" />
+        <UButton icon="i-heroicons-user-circle" class="mx-auto" label="Modifier" to="/profile/edit" color="my-primary" />
       </UContainer>
       <UContainer as="section" class="py-14 w-56 md:w-96">
         <h1 class="text-center mb-5">Votre profil</h1>
@@ -16,15 +15,29 @@
         <UDivider icon="i-heroicons-chart-pie-16-solid" />
         <UContainer class="flex flex-col items-center my-5">
           <span>Dernière modification</span>
-          <UBadge color="orange">{{ useDateFormat(user?.updated_at, 'DD-MM-YYYY HH:mm:ss').value }}</UBadge>
+          <UBadge variant="outline" color="orange" :ui="{
+            variant: {
+              outline: 'text-black dark:text-white'
+            }
+          }">{{ useDateFormat(user?.updated_at, 'DD-MM-YYYY HH:mm:ss').value }}
+          </UBadge>
         </UContainer>
         <UContainer class="flex flex-col items-center mb-5">
-          <span>Dernière connection</span>
-          <UBadge color="green">{{ useDateFormat(user?.last_sign_in_at, 'DD-MM-YYYY HH:mm:ss').value }}</UBadge>
+          <span>Dernière connexion</span>
+          <UBadge variant="outline" color="green" :ui="{
+            variant: {
+              outline: 'text-black dark:text-white'
+            }
+          }">{{ useDateFormat(user?.last_sign_in_at, 'DD-MM-YYYY HH:mm:ss').value }}
+          </UBadge>
         </UContainer>
 
         <UDivider icon="i-heroicons-exclamation-triangle-20-solid" class="mt-32" />
-        <UBadge color="red" class="flex justify-center my-5">Zone de danger</UBadge>
+        <UBadge variant="outline" color="red" :ui="{
+          variant: {
+            outline: 'text-black dark:text-white'
+          }
+        }" class="flex justify-center my-5">Zone de danger</UBadge>
 
         <ModalDelete class="flex flex-col items-center" @delete="onDelete" :is-loading="isDeleting">
           <template #content>

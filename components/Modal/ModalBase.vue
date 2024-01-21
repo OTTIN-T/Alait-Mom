@@ -1,6 +1,6 @@
 <template>
   <div>
-    <UButton :color="color" :label="label" class="text-black" :size="size" @click="showDialog" />
+    <UButton :color="color" :label="label" :size="size" @click="showDialog" />
 
     <UModal v-model="isOpened" prevent-close>
       <UCard :ui="{ ring: '', divide: 'divide-y divide-gray-100 dark:divide-gray-800' }">
@@ -52,7 +52,7 @@ watch(() => props.isOpen, (value) => {
 
 // INJECT
 const size = inject<ButtonSize>('modal-size-btn', 'md')
-const color = inject<string>('modal-color-btn', 'my-primary')
+const color = inject<string>('modal-color-btn', 'primary')
 </script>
 
 <style lang="sass" scoped>

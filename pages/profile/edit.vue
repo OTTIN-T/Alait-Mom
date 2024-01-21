@@ -18,7 +18,7 @@
                 </span>
               </template>
             </ModalCancel>
-            <UButton type="submit" class="text-black" :disabled="!hasCompletedForm" :loading="isLoading">
+            <UButton type="submit" :disabled="!hasCompletedForm" :loading="isLoading">
               Enregistrer
             </UButton>
           </UContainer>

@@ -12,12 +12,12 @@
           <div>
           </div>
           <div class="flex justify-around w-1/2 mx-auto mt-4 ">
-            <UButton @click="stopwatch.reset()" icon="i-heroicons-arrow-path-20-solid" class="rounded-full text-black"
+            <UButton @click="stopwatch.reset()" icon="i-heroicons-arrow-path-20-solid" class="rounded-full"
               color="my-primary" aria-label="boutton reset" />
             <UButton v-if="!stopwatch.isRunning.value" @click="stopwatch.start()" icon="i-heroicons-play-20-solid"
-              class="rounded-full text-black" color="my-primary" aria-label="boutton start" />
+              class="rounded-full" color="my-primary" aria-label="boutton start" />
             <UButton v-if="stopwatch.isRunning.value" @click="stopwatch.pause()" icon="i-heroicons-pause-20-solid"
-              class="rounded-full text-black" color="my-primary" aria-label="boutton pause" />
+              class="rounded-full" color="my-primary" aria-label="boutton pause" />
           </div>
         </div>
       </template>

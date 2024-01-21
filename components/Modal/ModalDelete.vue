@@ -5,10 +5,10 @@
     </template>
     <template #footer>
       <div class="flex justify-between">
-        <UButton color="red" class="text-black " @click="showDialog">
+        <UButton color="red" @click="showDialog">
           Retour
         </UButton>
-        <UButton color="green" class="text-black " @click="onDelete" :loading="isLoading">
+        <UButton color="green" @click="onDelete" :loading="isLoading">
           Confirmer la suppression
         </UButton>
       </div>

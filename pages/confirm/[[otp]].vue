@@ -45,7 +45,7 @@
                 </template>
               </UInput>
             </UFormGroup>
-            <UButton label="Renvoyer un email" color="my-primary" class="text-black w-auto mx-auto p-2 my-2 flex"
+            <UButton label="Renvoyer un email" color="my-primary" class="w-auto mx-auto p-2 my-2 flex"
               icon="i-heroicons-envelope-solid" :loading="isSendingEmail" variant="solid" type="submit"
               :disabled="!stateResend.email" />
           </UForm>

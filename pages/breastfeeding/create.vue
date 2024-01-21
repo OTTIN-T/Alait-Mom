@@ -30,7 +30,7 @@
                   </span>
                 </template>
               </ModalCancel>
-              <UButton type="submit" class="text-black" :disabled="!hasCompletedForm">
+              <UButton type="submit" :disabled="!hasCompletedForm">
                 Enregistrer
               </UButton>
             </UContainer>

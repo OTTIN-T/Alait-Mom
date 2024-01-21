@@ -1,5 +1,5 @@
 <template>
-  <UButton class="mt-3 text-black" icon="i-simple-icons-google" block label="Google" :disabled="props.disabled"
+  <UButton class="mt-3" icon="i-simple-icons-google" block label="Google" :disabled="props.disabled"
     @click="signInWithOAuth" :loading="isLoading" />
 </template>
 

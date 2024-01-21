@@ -1,7 +1,6 @@
 <template>
-  <UPopover overlay :popper="{ placement: 'bottom-start', arrow: true }" :open="isOpen">
-    <UButton color="white" aria-label="menu button" trailing-icon="i-heroicons-bars-3-16-solid"
-      @click="isOpen = !isOpen" />
+  <UPopover overlay :popper="{ placement: 'bottom-start', arrow: true }" v-model:open="isOpen">
+    <UButton color="white" aria-label="menu button" trailing-icon="i-heroicons-bars-3-16-solid" />
     <template #panel>
       <UVerticalNavigation :links="links" class="p-4" :ui="{ active: 'text-my-primary-700 dark:text-my-primary' }">
         <template #avatar="{ link }">
@@ -11,7 +10,8 @@
           <UIcon v-if="link.icon" :name="link.icon" class="text-base w-6" />
         </template>
         <template #default="{ link }">
-          <span class="hover:text-my-secondary relative" @click="isOpen = !isOpen">{{ link.label }}</span>
+          <span class="hover:text-my-secondary relative text-black dark:text-white" @click="isOpen = !isOpen">{{
+            link.label }}</span>
         </template>
       </UVerticalNavigation>
     </template>
@@ -45,7 +45,7 @@ const links = computed((): VerticalNavigationLink[] => [
     avatar: {
       src: getAvatar.value
     },
-    to: '/dashboard/profile'
+    to: '/profile/detail'
   },
   {
     label: 'Allaitements',

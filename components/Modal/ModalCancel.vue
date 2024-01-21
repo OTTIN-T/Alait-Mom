@@ -7,10 +7,10 @@
     </template>
     <template #footer>
       <div class="flex justify-between">
-        <UButton color="red" class="text-black " @click="showDialog">
+        <UButton color="red" @click="showDialog">
           Retour
         </UButton>
-        <UButton color="green" class="text-black " @click="onCancel">
+        <UButton color="green" @click="onCancel">
           Confirmer l'annulation
         </UButton>
       </div>

@@ -1,6 +1,5 @@
 <template>
-  <UButton icon="i-lucide-baby" variant="soft" class="text-black dark:text-white" label="Ajouter un enfant"
-    to="/children/create" color="my-primary" />
+  <UButton icon="i-lucide-baby" variant="soft" label="Ajouter un enfant" to="/children/create" />
 </template>
 
 <script lang="ts" setup>
