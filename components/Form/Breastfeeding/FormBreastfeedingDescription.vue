@@ -2,12 +2,14 @@
   <UFormGroup label="Description" :ui="{
     label: { wrapper: 'justify-center' }
   }">
-    <UTextarea v-model="description" color="primary" variant="outline" placeholder="Information complémentaire..."
-      autoresize />
+    <UTextarea v-model.trim="description" color="primary" variant="outline" placeholder="Information complémentaire..."
+      autoresize :maxlength="255" />
+    <span>{{ description ? description.length : 0 }}/255</span>
   </UFormGroup>
 </template>
 
 <script lang="ts" setup>
+// CONST
 const description = defineModel<string>('description', {
   required: false,
 })

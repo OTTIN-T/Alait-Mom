@@ -8,7 +8,7 @@ export default eventHandler(async (event) => {
   if (!body.success) {
     throw body.error.issues
   }
-  const { data, error } = await client.from('breastfeeding').insert([body.data]).select().returns<TablesInsert<'breastfeeding'>[]>()
+  const { data, error } = await client.from('breastfeeding').insert([body.data]).select().single()
 
   if (error) {
     throw createError({

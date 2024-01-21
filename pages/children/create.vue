@@ -77,7 +77,7 @@ async function onSubmit(formEvent: FormSubmitEvent<ChildrenSchemaType>): Promise
     },
   })
   isLoading.value = pending.value
-  if (data.value?.data) {
+  if (!error.value) {
     toast.add({
       id: 'children_notification',
       title: 'Enregistrement effectué !',

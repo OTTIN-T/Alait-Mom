@@ -4,7 +4,7 @@
   }" name="duration" class="mx-auto text-center">
     <UTabs :items="durationTabList" @change="onChangeTabs">
       <template #item="{ item }">
-        <UInput v-if="item.key === DurationMode.MANUAL" v-model="duration" type="time" class="w-24 mx-auto mt-5" />
+        <UInput v-if="item.key === DurationMode.MANUAL" v-model.trim="duration" type="time" class="w-24 mx-auto mt-5" />
         <div v-if="item.key === DurationMode.STOPWATCH" class="mt-5">
           <span class="text-center">
             {{ hours }} h {{ minutes }} min {{ seconds }} s

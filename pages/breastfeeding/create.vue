@@ -79,7 +79,7 @@ async function onSubmit(formEvent: FormSubmitEvent<BreastfeedingSchemaType>) {
     }
   })
   isLoading.value = pending.value
-  if (data.value?.data) {
+  if (!error.value) {
     toast.add({
       id: 'breastfeeding_notification',
       title: 'Enregistrement effectué !',
@@ -91,6 +91,7 @@ async function onSubmit(formEvent: FormSubmitEvent<BreastfeedingSchemaType>) {
     await navigateTo('/dashboard/home')
   }
 
+  console.log('error.value: ', error.value);
   if (error.value || data.value?.error) {
     toast.add({
       id: 'breastfeeding_notification',
@@ -112,7 +113,7 @@ async function initChildrenList() {
   if (data.value && data.value.childrenList?.length) {
     childrenList.value = data.value.childrenList
   }
-  if (!data.value) {
+  if (!data.value?.childrenList?.length) {
     childrenList.value = [{ name: 'Pas d\'enfant enregistré', id: 0 }]
   }
 }

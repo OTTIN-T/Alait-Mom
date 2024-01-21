@@ -1,6 +1,7 @@
 <template>
   <UFormGroup label="Information complémentaire" class="my-5">
-    <UTextarea v-model.number="description" autoresize />
+    <UTextarea v-model.number.trim="description" autoresize :maxlength="255" />
+    <span>{{ description ? description.length : 0 }}/255</span>
   </UFormGroup>
 </template>
 

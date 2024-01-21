@@ -15,13 +15,13 @@
       </span>
     </template>
     <template #description-data="{ row }">
-      <span>
-        {{ row.description === null ? 'Non renseigné' : row.description }}
-      </span>
+      <p>
+        {{ row.description === null ? 'Non renseigné' : row.description.value }}
+      </p>
     </template>
     <template #children-data="{ row }">
       <span>
-        {{ row.children.name === null ? 'Non renseigné' : row.children.name }}
+        {{ row.children === null ? 'Non renseigné' : row.children.name }}
       </span>
     </template>
     <template #created_at-data="{ row }">
@@ -96,7 +96,15 @@ const pageCount = 10
 
 // COMPUTED
 const breastfeedingSlicedList = computed((): Breastfeeding[] => {
-  return breastfeedingList.value.slice((page.value - 1) * pageCount, (page.value) * pageCount)
+  return breastfeedingList.value.slice((page.value - 1) * pageCount, (page.value) * pageCount).map((breastfeeding: Breastfeeding) => {
+    return {
+      ...breastfeeding,
+      description: {
+        value: breastfeeding.description,
+        class: 'max-w-48 break-words',
+      } as unknown as Breastfeeding['description'],
+    }
+  })
 })
 
 // FUNCTIONS

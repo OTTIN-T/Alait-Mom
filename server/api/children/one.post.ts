@@ -8,7 +8,7 @@ export default eventHandler(async (event) => {
   if (!body.success) {
     throw body.error.issues
   }
-  const { data, error } = await client.from('children').insert([body.data]).select().returns<TablesInsert<'children'>[]>()
+  const { data, error } = await client.from('children').insert([body.data]).select().single()
 
   if (error) {
     throw createError({

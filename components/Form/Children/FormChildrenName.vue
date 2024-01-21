@@ -1,6 +1,6 @@
 <template>
   <UFormGroup label="Prénom" class="my-5">
-    <UInput v-model.trim="name" autofocus />
+    <UInput v-model.trim="name" autofocus :maxlength="255" />
   </UFormGroup>
 </template>
 
