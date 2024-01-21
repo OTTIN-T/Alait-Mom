@@ -32,7 +32,6 @@ export default defineNuxtConfig({
       viewport: 'width=device-width, initial-scale=1',
       title: "Alait'Mom",
     },
-    keepalive: true,
     script: [
       { src: 'https://alait-mom.vercel.app/_vercel/insights/script.js', defer: true, type: 'text/partytown' },
       { src: 'https://alait-mom.vercel.app/_vercel/speed-insights/script.js', defer: true, type: 'text/partytown' },
@@ -81,6 +80,8 @@ export default defineNuxtConfig({
   security: {
     headers: {
       crossOriginEmbedderPolicy: process.env.NODE_ENV === 'development' ? 'unsafe-none' : 'credentialless',
+      crossOriginOpenerPolicy: process.env.NODE_ENV === 'development' ? 'unsafe-none' : 'same-origin-allow-popups',
+      crossOriginResourcePolicy: process.env.NODE_ENV === 'development' ? 'cross-origin' : 'same-origin',
       contentSecurityPolicy: {
         'img-src': ["'self'", 'data:', 'https:'],
       },

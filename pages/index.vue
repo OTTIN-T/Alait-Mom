@@ -22,15 +22,10 @@ async function redirectIfSession(): Promise<boolean | void | RouteLocationRaw | 
 }
 
 // LIFE CYCLE
-/**
- * SSR execute only once the onMounted hook, need to use beforeResolve for other cases
- */
 onMounted(() => {
   redirectIfSession()
 })
-beforeResolve((to, _from) => {
-  to.path === "/" && redirectIfSession();
-})
+
 </script>
 
 <style lang="scss" scoped>

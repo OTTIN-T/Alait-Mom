@@ -52,8 +52,6 @@ import { ChildrenGender } from '~/models/children.model';
 import { ChildrenSchema, type ChildrenSchemaType } from '~/models/schema/children.schema';
 
 // CONST
-const { beforeEach } = useRouter();
-const { createChildren } = useChildren()
 const isLoading = ref(false)
 const toast = useToast()
 const state = ref({
@@ -67,16 +65,19 @@ const state = ref({
 
 // FUNCTIONS
 async function onSubmit(formEvent: FormSubmitEvent<ChildrenSchemaType>): Promise<void> {
-  isLoading.value = true
-  const result = await createChildren({
-    name: formEvent.data.name,
-    gender: formEvent.data.gender,
-    birthdate: formEvent.data.birthdate?.length ? formEvent.data.birthdate : undefined,
-    size: !!formEvent.data.size ? formEvent.data.size : undefined,
-    weight: !!formEvent.data.weight ? formEvent.data.weight : undefined,
-    description: formEvent.data.description?.length ? formEvent.data.description : undefined
+  const { data, error, pending } = await useFetch('/api/children/one', {
+    method: 'POST',
+    body: {
+      name: formEvent.data.name,
+      gender: formEvent.data.gender,
+      birthdate: formEvent.data.birthdate?.length ? formEvent.data.birthdate : undefined,
+      size: !!formEvent.data.size ? formEvent.data.size : undefined,
+      weight: !!formEvent.data.weight ? formEvent.data.weight : undefined,
+      description: formEvent.data.description?.length ? formEvent.data.description : undefined
+    },
   })
-  if (result) {
+  isLoading.value = pending.value
+  if (data.value?.data) {
     toast.add({
       id: 'children_notification',
       title: 'Enregistrement effectué !',
@@ -87,16 +88,15 @@ async function onSubmit(formEvent: FormSubmitEvent<ChildrenSchemaType>): Promise
     })
     await navigateTo('/dashboard/home')
   }
-  if (!result) {
+  if (error.value || data.value?.error) {
     toast.add({
       id: 'children_notification',
-      title: 'Une erreur est survenue.',
-      description: 'Merci de réessayer ultérieurement.',
+      title: error.value?.name || 'Une erreur est survenue',
+      description: error.value?.message || data.value?.error?.message,
       icon: 'i-heroicons-exclamation-triangle-20-solid',
       timeout: 6000,
       color: 'red',
     })
-    isLoading.value = false
   }
 }
 
@@ -112,9 +112,8 @@ function initForm(): void {
 }
 
 // LIFE CYCLE
-beforeEach(async (_to, _from, next) => {
+onMounted(() => {
   initForm()
-  next()
 })
 
 // PROVIDE

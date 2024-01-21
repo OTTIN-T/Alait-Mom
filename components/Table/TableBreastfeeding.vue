@@ -19,9 +19,9 @@
         {{ row.description === null ? 'Non renseigné' : row.description }}
       </span>
     </template>
-    <template #children_id-data="{ row }">
+    <template #children-data="{ row }">
       <span>
-        {{ row.children_id === null ? 'Non renseigné' : row.children_id }}
+        {{ row.children.name === null ? 'Non renseigné' : row.children.name }}
       </span>
     </template>
     <template #created_at-data="{ row }">
@@ -41,8 +41,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { Breast } from '~/models/breastfeeding.model';
-import type { Tables } from '~/models/database.types';
+import type { Breast, Breastfeeding } from '~/models/breastfeeding.model';
 import { Sort } from '~/models/table.model';
 
 interface TableBreastfeedingPropOptions {
@@ -57,10 +56,9 @@ const props = withDefaults(defineProps<TableBreastfeedingPropOptions>(), {
 });
 
 // CONST
-const { beforeEach } = useRouter()
-const { getBreastfeedingList } = useBreastfeeding()
+const toast = useToast()
 const isLoading = ref<boolean>(true)
-const breastfeedingList = ref<(Tables<'breastfeeding'>)[]>([])
+const breastfeedingList = ref<Breastfeeding[]>([])
 const columns = [{
   key: 'id',
   label: 'ID',
@@ -76,7 +74,7 @@ const columns = [{
   key: 'description',
   label: 'Description',
 }, {
-  key: 'children_id',
+  key: 'children',
   label: 'Enfant',
   sortable: true
 }, {
@@ -97,28 +95,39 @@ const page = ref(1)
 const pageCount = 10
 
 // COMPUTED
-const breastfeedingSlicedList = computed((): Tables<'breastfeeding'>[] => {
+const breastfeedingSlicedList = computed((): Breastfeeding[] => {
   return breastfeedingList.value.slice((page.value - 1) * pageCount, (page.value) * pageCount)
 })
 
 // FUNCTIONS
-async function initBreastfeedingList(): Promise<void> {
-  isLoading.value = true
-  const result = await getBreastfeedingList(props.isAscending, props.limit)
-  if (result) {
-    breastfeedingList.value = result
+async function getBreastfeedingList(): Promise<void> {
+  const { data, error, pending } = await useFetch('/api/breastfeeding/list', {
+    method: 'GET',
+    query: {
+      isAscending: props.isAscending,
+      limit: props.limit,
+    },
+  })
+  isLoading.value = pending.value
+  if (data.value?.breastfeedingList) {
+    breastfeedingList.value = data.value.breastfeedingList
   }
-  isLoading.value = false
+  if (error.value || data.value?.error) {
+    toast.add({
+      id: 'breastfeeding_list_notification',
+      title: error.value?.name || 'Une erreur est survenue',
+      description: error.value?.message || data.value?.error?.message,
+      icon: 'i-heroicons-exclamation-triangle-20-solid',
+      timeout: 6000,
+      color: 'red',
+    })
+  }
 }
 
 // LIFECYCLE
 onMounted(async () => {
   await nextTick()
-  await initBreastfeedingList()
-})
-beforeEach(async (_to, _from, next) => {
-  await initBreastfeedingList()
-  next()
+  await getBreastfeedingList()
 })
 </script>
 

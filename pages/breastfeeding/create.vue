@@ -51,10 +51,7 @@ import type { ChildrenSelectForm } from '~/models/children.model';
 import { BreastfeedingSchema, type BreastfeedingSchemaType } from '~/models/schema/breastfeeding.schema';
 
 // CONST
-const { beforeEach } = useRouter();
 const toast = useToast()
-const { createBreastfeeding } = useBreastfeeding()
-const { getChildrenList } = useChildren()
 const isLoadingChildrenList = ref<boolean>(false)
 const childrenList = ref<(ChildrenSelectForm)[]>([])
 const isSending = ref<boolean>(false)
@@ -72,15 +69,17 @@ const hasCompletedForm = computed((): boolean => {
 
 // FUNCTIONS
 async function onSubmit(formEvent: FormSubmitEvent<BreastfeedingSchemaType>) {
-  isSending.value = true
-  const result = await createBreastfeeding({
-    breast: formEvent.data.breast,
-    duration: formEvent.data.duration,
-    description: formEvent.data.description ?? undefined,
-    children_id: state.value.children.id === 0 ? undefined : formEvent.data.children?.id,
+  const { data, error, pending } = await useFetch('/api/breastfeeding/one', {
+    method: 'POST',
+    body: {
+      breast: formEvent.data.breast,
+      duration: formEvent.data.duration,
+      description: formEvent.data.description ?? undefined,
+      children_id: formEvent.data.children?.id === 0 ? undefined : formEvent.data.children?.id,
+    }
   })
-  isSending.value = false
-  if (result) {
+  isSending.value = pending.value
+  if (data.value?.data) {
     toast.add({
       id: 'breastfeeding_notification',
       title: 'Enregistrement effectué !',
@@ -92,11 +91,11 @@ async function onSubmit(formEvent: FormSubmitEvent<BreastfeedingSchemaType>) {
     await navigateTo('/dashboard/home')
   }
 
-  if (!result) {
+  if (error.value || data.value?.error) {
     toast.add({
       id: 'breastfeeding_notification',
-      title: 'Une erreur est survenue.',
-      description: 'Merci de réessayer ultérieurement.',
+      title: error.value?.name ?? 'Une erreur est survenue',
+      description: error.value?.message ?? data.value?.error?.message,
       icon: 'i-heroicons-exclamation-triangle-20-solid',
       timeout: 6000,
       color: 'red',
@@ -105,16 +104,16 @@ async function onSubmit(formEvent: FormSubmitEvent<BreastfeedingSchemaType>) {
 
 }
 
+
 async function initChildrenList() {
-  isLoadingChildrenList.value = true
-  const result = await getChildrenList()
-  if (result) {
-    childrenList.value = result
+  const { data, pending } = await useFetch('/api/children/list')
+  isLoadingChildrenList.value = pending.value
+  if (data.value && data.value.childrenList?.length) {
+    childrenList.value = data.value.childrenList
   }
-  if (!result) {
+  if (!data.value) {
     childrenList.value = [{ name: 'Pas d\'enfant enregistré', id: 0 }]
   }
-  isLoadingChildrenList.value = false
 }
 
 function initForm(): void {
@@ -131,13 +130,8 @@ onMounted(async () => {
   await nextTick()
   await initChildrenList()
   initForm()
+})
 
-})
-beforeEach(async (_to, _from, next) => {
-  await initChildrenList()
-  initForm()
-  next()
-})
 
 // PROVIDE
 provide('modal-color-btn', 'red')
