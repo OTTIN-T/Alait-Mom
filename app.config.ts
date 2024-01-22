@@ -16,5 +16,10 @@ export default defineAppConfig({
         '5xl': 'text-5xl',
       },
     },
+    table: {
+      td: {
+        color: 'text-black dark:text-white',
+      },
+    },
   },
 })

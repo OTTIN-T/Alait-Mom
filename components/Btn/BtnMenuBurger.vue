@@ -51,7 +51,12 @@ const links = computed((): VerticalNavigationLink[] => [
     label: 'Allaitements',
     icon: 'i-fluent-emoji-high-contrast-breast-feeding',
     to: '/breastfeeding/list'
-  }
+  },
+  {
+    label: 'Enfants',
+    icon: 'i-lucide-baby',
+    to: '/children/list'
+  },
 ])
 
 // WATCH

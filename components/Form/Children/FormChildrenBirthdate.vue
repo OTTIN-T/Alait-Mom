@@ -1,6 +1,6 @@
 <template>
   <UFormGroup label="Date de naissance" class="my-5">
-    <UInput type="date" v-model.trim="birthdate" />
+    <UInput type="datetime-local" v-model.trim="birthdate" />
   </UFormGroup>
 </template>
 

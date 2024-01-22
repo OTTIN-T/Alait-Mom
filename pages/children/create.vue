@@ -71,8 +71,8 @@ async function onSubmit(formEvent: FormSubmitEvent<ChildrenSchemaType>): Promise
       name: formEvent.data.name,
       gender: formEvent.data.gender,
       birthdate: formEvent.data.birthdate?.length ? formEvent.data.birthdate : undefined,
-      size: !!formEvent.data.size ? formEvent.data.size : undefined,
-      weight: !!formEvent.data.weight ? formEvent.data.weight : undefined,
+      size: !!formEvent.data.size ? formartSize(formEvent.data.size) : undefined,
+      weight: !!formEvent.data.weight ? formatWeight(formEvent.data.weight) : undefined,
       description: formEvent.data.description?.length ? formEvent.data.description : undefined
     },
   })
@@ -111,6 +111,23 @@ function initForm(): void {
     weight: 0,
     description: '',
   }
+}
+
+function formatWeight(weight: number): number {
+  if (weight.toString().includes('.') || weight.toString().includes(',')) {
+    return weight
+  }
+  if (weight < 1000) {
+    return weight / 100
+  }
+  return weight / 1000
+}
+
+function formartSize(size: number): number {
+  if (size.toString().includes(',')) {
+    return Math.floor(parseFloat(size.toString().replaceAll(',', '.')))
+  }
+  return Math.floor(parseFloat(size.toString()))
 }
 
 // LIFE CYCLE

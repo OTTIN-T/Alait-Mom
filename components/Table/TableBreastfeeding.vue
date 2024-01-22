@@ -1,9 +1,5 @@
 <template>
-  <UTable :columns="columns" :rows="breastfeedingSlicedList" :sort="sort" :loading="isLoading" :ui="{
-    td: {
-      color: 'text-black dark:text-white max-w-'
-    },
-  }">
+  <UTable :columns="columns" :rows="breastfeedingSlicedList" :sort="sort" :loading="isLoading">
     <template #breast-data="{ row }">
       <span>
         {{ formatBreast[row.breast as keyof typeof formatBreast] }}
