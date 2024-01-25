@@ -1,5 +1,10 @@
 <template>
   <UTable :columns="columns" :rows="breastfeedingSlicedList" :sort="sort" :loading="isLoading">
+    <template #id-data="{ row }">
+      <NuxtLink :to="`/breastfeeding/${row.id}`" class="font-bold underline text-my-secondary dark:text-my-secondary-300">
+        {{ row.id }}
+      </NuxtLink>
+    </template>
     <template #breast-data="{ row }">
       <span>
         {{ formatBreast[row.breast as keyof typeof formatBreast] }}

@@ -196,4 +196,7 @@ onMounted(async () => {
   await nextTick()
   await getChildren()
 })
+
+// PROVIDE
+provide('modal-color-btn', 'red')
 </script>
