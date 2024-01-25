@@ -24,10 +24,12 @@
   },
   "dependencies": {
     "nuxt-lazy-hydrate": "^1.0.0",
+    "remove": "^0.1.5",
     "zod": "^3.22.4"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.6.3",
+    "@dargmuesli/nuxt-cookie-control": "^7.2.4",
     "@iconify-json/fluent-emoji-high-contrast": "^1.1.15",
     "@iconify-json/heroicons": "^1.1.19",
     "@iconify-json/lucide": "^1.1.156",
@@ -60,6 +62,7 @@
     "nuxt-seo-experiments": "^3.1.9",
     "nuxt-simple-robots": "3.1.10",
     "nuxt-simple-sitemap": "^4.4.1",
+    "sass": "^1.70.0",
     "simple-git-hooks": "^2.9.0",
     "supabase": "^1.132.1",
     "vitest-environment-nuxt": "^1.0.0",

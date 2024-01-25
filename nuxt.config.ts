@@ -118,6 +118,24 @@ export default defineNuxtConfig({
   turnstile: {
     siteKey: process.env.TURNSTILE_SITE_KEY,
   },
+  cookieControl: {
+    locales: ['fr'],
+    cookies: {
+      necessary: [
+        {
+          description: {
+            fr: "Ces cookie nous servent pour le bon fonctionnement de l'application, choix du thème, informations de connexion, durée de session. Aucun cookie servant à l'analytique est utilisé ici.",
+            en: 'These cookies are necessary for the proper functioning of the application, choice of theme, login information, session duration. No cookie used for analytics is used here.',
+          },
+          name: {
+            fr: 'Cookie nécessaire',
+            en: 'Necessary cookie',
+          },
+        },
+      ],
+      optional: [],
+    },
+  },
   modules: [
     '@vueuse/nuxt',
     '@nuxtjs/google-fonts',
@@ -139,5 +157,6 @@ export default defineNuxtConfig({
     '@nuxtjs/supabase',
     '@nuxtjs/turnstile',
     '@nuxtjs/partytown',
+    '@dargmuesli/nuxt-cookie-control',
   ],
 })
