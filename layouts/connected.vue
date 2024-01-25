@@ -1,6 +1,6 @@
 <template>
   <NavHeaderConnected />
-  <main>
+  <main class="min-h-dvh">
     <slot name="body" />
     <BtnAddBreastfeeding class="fixed bottom-5 right-5" />
   </main>

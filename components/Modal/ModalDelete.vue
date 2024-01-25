@@ -1,5 +1,5 @@
 <template>
-  <ModalBase title="Supprimer mon compte" label="Supprimer mon compte" :is-open="isOpen" @show-dialog="showDialog">
+  <ModalBase :title="title" :label="label" :is-open="isOpen" @show-dialog="showDialog">
     <template #content>
       <slot name="content" />
     </template>
@@ -19,6 +19,8 @@
 <script lang="ts" setup>
 interface ModalDeletePropOptions {
   isLoading: boolean;
+  title: string;
+  label: string;
 }
 withDefaults(defineProps<ModalDeletePropOptions>(), {
   isLoading: false,

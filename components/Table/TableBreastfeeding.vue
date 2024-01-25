@@ -16,8 +16,12 @@
       </p>
     </template>
     <template #children-data="{ row }">
-      <span>
-        {{ row.children === null ? 'Non renseigné' : row.children.name }}
+      <NuxtLink v-if="row.children !== null" :to="`/children/${row.children.id}`"
+        class="font-bold underline text-my-secondary dark:text-my-secondary-300">
+        {{ row.children.name }}
+      </NuxtLink>
+      <span v-if="row.children === null">
+        Non renseigné
       </span>
     </template>
     <template #created_at-data="{ row }">
@@ -31,9 +35,12 @@
         <BtnAddBreastfeeding />
       </div>
     </template>
+    <template #loading-state>
+      <LoaderSpinner />
+    </template>
   </UTable>
   <UPagination v-if="hasPagination && breastfeedingSlicedList.length" v-model="page" :page-count="pageCount"
-    :total="breastfeedingList.length" class="flex mx-auto" />
+    :total="breastfeedingList.length" class="flex mx-auto mt-5" />
 </template>
 
 <script lang="ts" setup>
@@ -57,7 +64,7 @@ const isLoading = ref<boolean>(true)
 const breastfeedingList = ref<Breastfeeding[]>([])
 const columns = [{
   key: 'id',
-  label: 'ID',
+  label: 'N°',
 }, {
   key: 'breast',
   label: 'Sein',

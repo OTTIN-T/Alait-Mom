@@ -1,7 +1,12 @@
 <template>
   <UTable :columns="columns" :rows="childrenList" :sort="sort" :loading="isLoading">
-    <template #birth_date-data="{ row }">
-      {{ useDateFormat(row.birth_date, 'DD-MM-YYYY HH:mm:ss').value }}
+    <template #name-data="{ row }">
+      <NuxtLink :to="`/children/${row.id}`" class="font-bold underline text-my-secondary dark:text-my-secondary-300">
+        {{ row.name }}
+      </NuxtLink>
+    </template>
+    <template #birthdate-data="{ row }">
+      {{ row.birthdate === null ? 'Non renseigné' : useDateFormat(row.birthdate, 'DD-MM-YYYY HH:mm').value }}
     </template>
     <template #description-data="{ row }">
       <p>
@@ -20,7 +25,7 @@
     </template>
     <template #created_at-data="{ row }">
       <span>
-        {{ useDateFormat(row.created_at, 'DD-MM-YYYY HH:mm:ss').value }}
+        {{ useDateFormat(row.created_at, 'DD-MM-YYYY HH:mm').value }}
       </span>
     </template>
     <template #empty-state>
@@ -28,6 +33,9 @@
         <span class="italic text-sm">Vous n'avez pas encore d'enfant renseigné !</span>
         <BtnAddChildren />
       </div>
+    </template>
+    <template #loading-state>
+      <LoaderSpinner />
     </template>
   </UTable>
 </template>
@@ -39,21 +47,21 @@ import { Sort } from '~/models/table.model';
 // CONST
 const toast = useToast()
 const childrenList = ref<Tables<'children'>[]>([])
-const isLoading = ref<boolean>(false)
+const isLoading = ref<boolean>(true)
 const sort = ref({
   column: 'created_at',
   direction: Sort.DESC,
 })
 const columns = [{
   key: 'id',
-  label: 'ID',
+  label: 'N°',
 }, {
   key: 'name',
   label: 'Nom',
   sortable: true
 },
 {
-  key: 'birth_date',
+  key: 'birthdate',
   label: 'Date de naissance',
   sortable: true
 },

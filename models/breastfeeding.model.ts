@@ -12,5 +12,5 @@ export enum DurationMode {
 }
 
 export interface Breastfeeding extends Tables<'breastfeeding'> {
-  children: Pick<Tables<'children'>, 'name'>
+  children: Pick<Tables<'children'>, 'name' | 'id'>
 }

@@ -1,9 +1,9 @@
 import { serverSupabaseClient } from '#supabase/server'
-import { Tables, TablesInsert } from '~/models/database.types'
+import { TablesInsert } from '~/models/database.types'
 import { BreastfeedingSchema } from '~/models/schema/breastfeeding.schema'
 
 export default eventHandler(async (event) => {
-  const client = await serverSupabaseClient<Tables<'breastfeeding'>>(event)
+  const client = await serverSupabaseClient<TablesInsert<'breastfeeding'>>(event)
   const body = await readValidatedBody(event, (body) => BreastfeedingSchema.safeParse(body))
   if (!body.success) {
     throw body.error.issues

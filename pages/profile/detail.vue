@@ -13,7 +13,7 @@
         <FormProfileName v-model:name="userName" :is-disabled="true" />
 
         <UDivider icon="i-heroicons-chart-pie-16-solid" />
-        <UContainer class="flex flex-col items-center my-5">
+        <UContainer class="flex flex-col items-center my-5 px-0">
           <span>Dernière modification</span>
           <UBadge variant="outline" color="orange" :ui="{
             variant: {
@@ -39,7 +39,8 @@
           }
         }" class="flex justify-center my-5">Zone de danger</UBadge>
 
-        <ModalDelete class="flex flex-col items-center" @delete="onDelete" :is-loading="isDeleting">
+        <ModalDelete title="Supprimer mon compte" label="Supprimer mon compte" class="flex flex-col items-center"
+          @delete="onDelete" :is-loading="isDeleting">
           <template #content>
             <p>
               Êtes-vous sûr de vouloir supprimer votre compte ? Toute suppression est <strong>définitive</strong> ainsi
@@ -104,7 +105,7 @@ async function onDelete(): Promise<void> {
   })
 
   isDeleting.value = pending.value
-  if (!data.value?.error) {
+  if (!data.value?.error && !error.value) {
     toast.add({
       id: 'profile_deletion_notification',
       title: 'Suppression effectué !',
@@ -119,7 +120,7 @@ async function onDelete(): Promise<void> {
 
   if (error.value || data.value?.error) {
     toast.add({
-      id: 'breastfeeding_notification',
+      id: 'profile_deletion_notification',
       title: error.value?.name ?? 'Une erreur est survenue',
       description: error.value?.message ?? data.value?.error?.message,
       icon: 'i-heroicons-exclamation-triangle-20-solid',

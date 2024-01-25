@@ -52,6 +52,8 @@ import { ChildrenGender } from '~/models/children.model';
 import { ChildrenSchema, type ChildrenSchemaType } from '~/models/schema/children.schema';
 
 // CONST
+const router = useRouter()
+const { formartSize, formatWeight } = useChildren()
 const isLoading = ref(false)
 const toast = useToast()
 const state = ref({
@@ -86,7 +88,7 @@ async function onSubmit(formEvent: FormSubmitEvent<ChildrenSchemaType>): Promise
       timeout: 6000,
       color: 'green',
     })
-    await navigateTo('/dashboard/home')
+    router.back()
   }
   if (error.value || data.value?.error) {
     toast.add({
@@ -113,22 +115,9 @@ function initForm(): void {
   }
 }
 
-function formatWeight(weight: number): number {
-  if (weight.toString().includes('.') || weight.toString().includes(',')) {
-    return weight
-  }
-  if (weight < 1000) {
-    return weight / 100
-  }
-  return weight / 1000
-}
 
-function formartSize(size: number): number {
-  if (size.toString().includes(',')) {
-    return Math.floor(parseFloat(size.toString().replaceAll(',', '.')))
-  }
-  return Math.floor(parseFloat(size.toString()))
-}
+
+
 
 // LIFE CYCLE
 onMounted(() => {
