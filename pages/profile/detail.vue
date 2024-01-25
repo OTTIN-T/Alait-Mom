@@ -4,15 +4,15 @@
       <UContainer as="section" class="pt-24 flex justify-around">
         <UButton icon="i-heroicons-user-circle" class="mx-auto" label="Modifier" to="/profile/edit" color="my-primary" />
       </UContainer>
-      <UContainer as="section" class="py-14 w-56 md:w-96">
+      <UContainer as="section" class="py-14 md:w-96">
         <h1 class="text-center mb-5">Votre profil</h1>
         <UDivider icon="i-simple-icons-maildotru" />
         <FormProfileEmail v-model:email="userEmail" :is-disabled="true" />
 
-        <UDivider icon="i-heroicons-pencil-square" />
+        <UDivider icon="i-heroicons-pencil-square" class="pt-10" />
         <FormProfileName v-model:name="userName" :is-disabled="true" />
 
-        <UDivider icon="i-heroicons-chart-pie-16-solid" />
+        <UDivider icon="i-heroicons-chart-pie-16-solid" class="pt-10" />
         <UContainer class="flex flex-col items-center my-5 px-0">
           <span>Dernière modification</span>
           <UBadge variant="outline" color="orange" :ui="{
@@ -32,7 +32,7 @@
           </UBadge>
         </UContainer>
 
-        <UDivider icon="i-heroicons-exclamation-triangle-20-solid" class="mt-32" />
+        <UDivider icon="i-heroicons-exclamation-triangle-20-solid" class="mt-32 pt-10" />
         <UBadge variant="outline" color="red" :ui="{
           variant: {
             outline: 'text-black dark:text-white'

@@ -6,7 +6,7 @@
         <BtnAddChildren />
       </UContainer>
       <UContainer as="section" class="py-10 flex flex-col">
-        <UDivider icon="i-fluent-emoji-high-contrast-breast-feeding" class=" w-1/2 mx-auto" />
+        <UDivider icon="i-fluent-emoji-high-contrast-breast-feeding" class="md:w-1/2 mx-auto" />
         <h1 class="text-center mt-5">Vos 5 derniers allaitements</h1>
         <TableBreastfeeding :limit="5" />
         <UButton class="mt-5  mx-auto" to="/breastfeeding/list" label="Tous vos allaitements"

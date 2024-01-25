@@ -1,10 +1,9 @@
 <template>
   <NuxtLayout name="connected">
     <template #body>
-      <UContainer as="section" class="py-12">
+      <UContainer as="section" class="py-12 md:w-96 ">
         <h1 class="text-center mt-5">Modifier votre allaitement</h1>
-        <UForm :schema="BreastfeedingSchema" :state="state" class="space-y-4 mt-5 w-56 md:w-96 mx-auto"
-          @submit="onSubmit">
+        <UForm :schema="BreastfeedingSchema" :state="state" class="space-y-4 mt-5 mx-auto" @submit="onSubmit">
           <ClientOnly>
             <template #fallback>
               <SkeletonFormBreastfeeding />

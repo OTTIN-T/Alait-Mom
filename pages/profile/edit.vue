@@ -1,13 +1,13 @@
 <template>
   <NuxtLayout name="connected">
     <template #body>
-      <UContainer as="section" class="py-12">
+      <UContainer as="section" class="py-12 md:w-96">
         <h1 class="text-center mb-5">Modifier votre profil</h1>
-        <UForm :schema="ProfileSchema" :state="state" @submit="onSubmit" class="space-y-4 mt-5 w-56 md:w-96 mx-auto">
+        <UForm :schema="ProfileSchema" :state="state" @submit="onSubmit" class="space-y-4 mt-5 mx-auto">
           <UDivider icon="i-simple-icons-maildotru" />
           <FormProfileEmail v-model:email="state.email" :is-disabled="false" />
 
-          <UDivider icon="i-heroicons-pencil-square" />
+          <UDivider icon="i-heroicons-pencil-square" class="pt-10" />
           <FormProfileName v-model:name="state.name" :is-disabled="false" />
 
           <UContainer class="flex justify-between pt-10">

@@ -1,9 +1,9 @@
 <template>
   <NuxtLayout name="connected">
     <template #body>
-      <UContainer as="section" class="py-14">
+      <UContainer as="section" class="py-14 md:w-96">
         <h1 class="text-center mb-5">Information de votre enfant</h1>
-        <UForm :state="state" :schema="ChildrenSchema" @submit="onSubmit" class="space-y-4 mt-5 w-56 md:w-96 mx-auto">
+        <UForm :state="state" :schema="ChildrenSchema" @submit="onSubmit" class="space-y-4 mt-5 mx-auto">
           <ClientOnly>
             <template #fallback>
               <SkeletonFormChildren />
@@ -11,19 +11,19 @@
             <UDivider icon="i-material-symbols-light-transgender-rounded" />
             <FormChildrenGender v-model:gender="state.gender" />
 
-            <UDivider icon="i-lucide-baby" />
+            <UDivider icon="i-lucide-baby" class="pt-10" />
             <FormChildrenName v-model:name="state.name" />
 
-            <UDivider icon="i-heroicons-calendar-days-16-solid" />
+            <UDivider icon="i-heroicons-calendar-days-16-solid" class="pt-10" />
             <FormChildrenBirthdate v-model:birthdate="state.birthdate" />
 
-            <UDivider icon="i-mdi-human-male-height" />
+            <UDivider icon="i-mdi-human-male-height" class="pt-10" />
             <FormChildrenSize v-model:size="state.size" />
 
-            <UDivider icon="i-lucide-weight" />
+            <UDivider icon="i-lucide-weight" class="pt-10" />
             <FormChildrenWeight v-model:weight="state.weight" />
 
-            <UDivider icon="i-heroicons-pencil-square" />
+            <UDivider icon="i-heroicons-pencil-square" class="pt-10" />
             <FormChildrenDescription v-model:description="state.description" />
 
             <UContainer class="flex justify-between pt-10">
