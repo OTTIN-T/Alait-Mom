@@ -39,6 +39,7 @@ export default defineNuxtConfig({
   },
   experimental: {
     typedPages: true,
+    externalVue: false,
   },
   vue: {
     defineModel: true,
