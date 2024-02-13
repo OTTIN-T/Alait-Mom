@@ -31,14 +31,14 @@ const btnProperty = computed((): {
 } => {
   if (nuxtApp.$pwa?.isPWAInstalled) {
     return {
-      icon: 'i-heroicons-check-circle-16-solid',
+      icon: 'i-line-md-confirm-circle-twotone',
       label: 'Déjà installée !',
       color: 'green',
       disabled: true,
     }
   }
   return {
-    icon: 'i-heroicons-inbox-arrow-down-20-solid',
+    icon: 'i-line-md-download-loop',
     label: 'Installe moi !',
     color: 'my-primary',
     disabled: false,

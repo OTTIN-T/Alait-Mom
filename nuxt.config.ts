@@ -40,6 +40,7 @@ export default defineNuxtConfig({
   experimental: {
     typedPages: true,
     externalVue: false,
+    viewTransition: true,
   },
   vue: {
     defineModel: true,
@@ -85,13 +86,14 @@ export default defineNuxtConfig({
       crossOriginResourcePolicy: process.env.NODE_ENV === 'development' ? 'cross-origin' : 'same-origin',
       contentSecurityPolicy: {
         'img-src': ["'self'", 'data:', 'https:'],
+        'script-src-attr': ["'unsafe-inline'"],
       },
       xXSSProtection: '1; mode=block',
     },
   },
   ui: {
     global: true,
-    icons: ['heroicons', 'simple-icons', 'fluent-emoji-high-contrast', 'lucide', 'material-symbols-light', 'mdi'],
+    icons: ['heroicons', 'simple-icons', 'fluent-emoji-high-contrast', 'lucide', 'material-symbols-light', 'mdi', 'line-md'],
   },
   tailwindcss: {
     cssPath: '~/assets/css/main.css',
@@ -137,6 +139,9 @@ export default defineNuxtConfig({
       optional: [],
     },
   },
+  anime: {
+    composables: true,
+  },
   modules: [
     '@vueuse/nuxt',
     '@nuxtjs/google-fonts',
@@ -159,5 +164,8 @@ export default defineNuxtConfig({
     '@nuxtjs/turnstile',
     '@nuxtjs/partytown',
     '@dargmuesli/nuxt-cookie-control',
+    '@hypernym/nuxt-anime',
+    'nuxt-aos',
+    'nuxt-svgo',
   ],
 })

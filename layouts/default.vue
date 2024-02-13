@@ -3,26 +3,7 @@
   <main>
     <slot name="body" />
 
-    <CookieControl locale="fr">
-      <!-- <template #bar>
-          <h2>Bar title</h2>
-          <p>Bar description (you can use $cookies.text.barDescription)</p>
-          <n-link>Go somewhere</n-link>
-        </template>
-        <template #modal>
-          <h2>Modal title</h2>
-          <p>Modal description</p>
-        </template>
-        <template #cookie="{ cookie }">
-          <h3 v-text="cookie.name" />
-          <span v-html="cookie.description" />
-
-          <div v-if="cookie.targetCookieIds">
-            <b>Cookie ids: </b>
-            <span v-text="cookie?.targetCookieIds?.join(', ')" />
-          </div>
-        </template> -->
-    </CookieControl>
+    <CookieControl locale="fr" />
   </main>
   <LazyNavFooter />
 </template>
@@ -50,12 +31,18 @@
   background-color: #0F172A;
 
   .cookieControl__BarContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
     p {
       padding-right: 15px;
     }
   }
 
   .cookieControl__BarButtons {
+    margin-top: 1.25rem;
+
     button {
       border-radius: 0.375rem !important;
       padding: 10px;
@@ -83,7 +70,10 @@
 }
 
 :deep(.cookieControl__ModalContent) {
+  border-radius: 0.375rem !important;
+
   .cookieControl__ModalContentInner {
+
     button.cookieControl__ModalClose {
       border-radius: 0.375rem !important;
       padding: 10px;

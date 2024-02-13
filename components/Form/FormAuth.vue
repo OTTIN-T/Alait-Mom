@@ -30,6 +30,7 @@
 import type { FormSubmitEvent } from '#ui/types';
 import type { NavigationFailure, RouteLocationRaw } from 'vue-router/auto';
 import { AuthSchema, type AuthSchemaType } from '~/models/schema/auth.schema';
+import confetti from 'canvas-confetti';
 
 interface FormAuthPropOptions {
   label?: string;
@@ -71,7 +72,13 @@ async function onSubmit(authEvent: FormSubmitEvent<AuthSchemaType>): Promise<boo
   })
   isLoading.value = false
   isOpen.value = false
+
   if (!error) {
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { y: 0.6 }
+    });
     toast.add({
       id: 'auth_notification',
       title: 'Email envoyé !',
