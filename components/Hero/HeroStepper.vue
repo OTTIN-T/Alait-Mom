@@ -1,21 +1,21 @@
 <template>
   <section class="relative" ref="container">
-    <div class="mx-auto max-w-7xl px-5 pt-5 md:px-10 lg:pt-16 relative z-50">
-      <div class="mx-auto w-full max-w-3xl text-center mb-16 relative z-50">
+    <div class="relative z-50 px-5 pt-5 mx-auto max-w-7xl md:px-10 lg:pt-16">
+      <div class="relative z-50 w-full max-w-3xl mx-auto mb-16 text-center">
         <p class="uppercase text-my-accent-700 dark:text-my-accent">
           4 étapes faciles
         </p>
         <h2 class="text-2xl font-semibold md:text-4xl">
           Comment ça
           <div data-aos="flip-up" data-aos-easing="ease-in-quad">
-            <div class="px-4 md:px-1 py-1 text bg-my-accent -rotate-3 w-auto md:w-1/2 md:mx-auto">
+            <div class="w-auto px-4 py-1 md:px-1 text bg-my-accent -rotate-3 md:w-1/2 md:mx-auto">
               <div class="rotate-3">
                 marche
               </div>
             </div>
           </div>
         </h2>
-        <p class="mx-auto mb-8 mt-4 text-my-gray-800 dark:text-my-gray-300 md:mb-12 lg:mb-16">
+        <p class="mx-auto mt-4 mb-8 text-my-gray-800 dark:text-my-gray-300 md:mb-12 lg:mb-16">
           Rien de plus simple Alait'Mom est une application intuitive.
         </p>
       </div>
@@ -26,14 +26,14 @@
           :title="title" :description="description" :index="index" data-aos="zoom-in"
           :data-aos-delay="setFadeDelay(index)" data-aos-easing="ease-out-cubic" :data-aos-duration="800">
           <template #content>
-            <BtnInstall v-if="header === 1" class="mx-auto anim-install-btn  rounded-md"
+            <BtnInstall v-if="header === 1" class="mx-auto rounded-md anim-install-btn"
               @mouseover="setAnim('anim-install-btn', 'over')" @mouseleave="setAnim('anim-install-btn', 'leave')" />
-            <FormAuth v-if="header === 2" class="mx-auto anim-auth-1-btn rounded-md"
+            <FormAuth v-if="header === 2" class="mx-auto rounded-md anim-auth-1-btn"
               @mouseover="setAnim('anim-auth-1-btn', 'over')" @mouseleave="setAnim('anim-auth-1-btn', 'leave')" />
-            <FormAuth v-if="header === 3" class="mx-auto anim-auth-2-btn rounded-md"
+            <FormAuth v-if="header === 3" class="mx-auto rounded-md anim-auth-2-btn"
               @mouseover="setAnim('anim-auth-2-btn', 'over')" @mouseleave="setAnim('anim-auth-2-btn', 'leave')"
               label="Connecte toi !" />
-            <UButton v-if="header === 4" class="mx-auto anim-pricing-btn rounded-md"
+            <UButton v-if="header === 4" class="mx-auto rounded-md anim-pricing-btn"
               @mouseover="setAnim('anim-pricing-btn', 'over')" @mouseleave="setAnim('anim-pricing-btn', 'leave')"
               label="Abonne toi !" to="/pricing" size="xl" />
           </template>
@@ -65,7 +65,7 @@ const heroTileList: Array<{ header: string | number; title: string; description:
   {
     header: 4,
     title: "Abonnement",
-    description: "Les fonctionnalités principales sont gratuites, mais vous pouvez souscrire à un abonnement pour débloquer des fonctionnalités supplémentaires !"
+    description: "Les fonctionnalités principales sont gratuites, mais tu peux souscrire à un abonnement pour débloquer des fonctionnalités supplémentaires !"
   }
 ];
 const fadeDelay: Record<number, number> = {

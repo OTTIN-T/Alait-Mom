@@ -100,8 +100,8 @@ export default defineNuxtConfig({
     configPath: '~/config/tailwind.config.ts',
   },
   colorMode: {
-    preference: 'system',
-    fallback: 'light',
+    preference: 'dark',
+    fallback: 'dark',
     classSuffix: '',
   },
   image: {
@@ -115,7 +115,7 @@ export default defineNuxtConfig({
     redirectOptions: {
       login: '/',
       callback: '/confirm',
-      exclude: ['/', '/confirm/*', '/cgu', '/rgpd'],
+      exclude: ['/', '/confirm/*', '/cgu', '/rgpd', '/pricing'],
     },
   },
   turnstile: {

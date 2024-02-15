@@ -1,12 +1,12 @@
 <template>
   <UContainer as="section" class="py-16 md:py-24 lg:py-32" ref="container">
-    <div class="grid items-center justify-items-start gap-8 sm:gap-16 lg:grid-cols-2">
-      <div class="flex flex-col relative z-50">
-        <h1 class="title relative mb-4 text-2xl font-bold md:text-4xl">
-          Alait'Mom l'appli qu'il vous faut pour <span class="anim-text inline-block" ref="animFollowText">suivre</span>
-          vos <span class="anim-text inline-block" ref="animBreastfeedingText">allaitements</span> !
+    <div class="grid items-center gap-8 justify-items-start sm:gap-16 lg:grid-cols-2">
+      <div class="relative z-50 flex flex-col">
+        <h1 class="relative mb-4 text-2xl font-bold title md:text-4xl">
+          Alait'Mom l'appli qu'il vous faut pour <span class="inline-block anim-text" ref="animFollowText">suivre</span>
+          vos <span class="inline-block anim-text" ref="animBreastfeedingText">allaitements</span> !
         </h1>
-        <p class="mb-6 max-w-lg text-base text-my-gray-700 dark:text-my-gray-300 md:text-xl md:mb-10 lg:mb-12">
+        <p class="max-w-lg mb-6 text-base text-my-gray-700 dark:text-my-gray-300 md:text-xl md:mb-10 lg:mb-12">
           Ajoutez facilement le nombre d'allaitement par jour, la durée et le sein utilisé.
         </p>
         <FormAuth />
@@ -17,8 +17,17 @@
       <NuxtImg src="/pwa/screenshot/desktop-1.png" alt="" class="inline-block h-full w-full max-w-[640px]" preload />
     </div>
     <NuxtImg src="/logo-no-bg.svg" alt="Logo alait'mom" :width="200" :height="200"
-      class="alm-logo mx-auto mt-5 lg:mt-16 top-2" loading="lazy" />
+      class="mx-auto mt-5 alm-logo lg:mt-16 top-2" loading="lazy" />
     <LazyHeroStepper />
+    <LazyUBadge variant="outline" color="my-primary" :ui="{
+      variant: {
+        outline: 'text-black dark:text-white'
+      },
+      rounded: 'rounded-full'
+    }" class="flex justify-center w-40 mx-auto mt-10 text-sm">
+      <UIcon name="i-heroicons-heart" class="mr-2" />
+      Fait par un père
+    </LazyUBadge>
   </UContainer>
 </template>
 
@@ -54,31 +63,8 @@ const heartList = [
 // FUNCTIONS
 function setAnimation(): void {
   if (animFollowText.value && animFollowText.value.textContent && animBreastfeedingText.value && animBreastfeedingText.value.textContent) {
-    animFollowText.value.innerHTML = animFollowText.value.textContent.replace(/\S/g, "<span class='follow-letter inline-block text-my-accent-500'>$&</span>");
-    animBreastfeedingText.value.innerHTML = animBreastfeedingText.value.textContent.replace(/\S/g, "<span class='breastfeeding-letter inline-block text-my-accent-500'>$&</span>");
-
-    // $anime.timeline({
-    //   loop: true,
-    //   duration: 1000,
-    //   direction: 'alternate',
-    // }).add({
-    //   targets: '.title .follow-letter',
-    //   opacity: [0, 1],
-    //   translateY: ["1.1em", 0],
-    //   translateZ: 0,
-    //   delay: $anime.stagger(100, { start: 500 }),
-    //   loop: true,
-    //   direction: 'alternate',
-    // }).add({
-    //   targets: '.title .breastfeeding-letter',
-    //   opacity: [0, 1],
-    //   translateY: ["1.1em", 0],
-    //   translateZ: 0,
-    //   delay: $anime.stagger(100),
-    //   loop: true,
-    //   endDelay: 1500,
-    //   direction: 'alternate',
-    // })
+    animFollowText.value.innerHTML = animFollowText.value.textContent.replace(/\S/g, "<span class='inline-block follow-letter text-my-accent-500'>$&</span>");
+    animBreastfeedingText.value.innerHTML = animBreastfeedingText.value.textContent.replace(/\S/g, "<span class='inline-block breastfeeding-letter text-my-accent-500'>$&</span>");
 
     $anime.timeline({
       loop: true,

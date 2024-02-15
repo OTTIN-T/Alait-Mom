@@ -1,16 +1,16 @@
 <template>
   <NuxtLayout name="default">
     <template #body>
-      <section v-if="!haveParams" class="h-dvh flex flex-col justify-center">
+      <section v-if="!haveParams" class="flex flex-col justify-center h-dvh">
         <h1 class="text-xl text-center">Redirection en cours...</h1>
-        <USkeleton class="h-4 w-1/2 mx-auto mt-3" />
+        <USkeleton class="w-1/2 h-4 mx-auto mt-3" />
       </section>
-      <section v-if="haveParams" class="h-dvh flex flex-col justify-center mt-10">
-        <h1 class="text-xl text-center mb-5 mt-10">Verification et activation de votre compte</h1>
+      <section v-if="haveParams" class="flex flex-col justify-center mt-10 h-dvh">
+        <h1 class="mt-10 mb-5 text-xl text-center">Verification et activation de votre compte</h1>
         <h2 class="text-center">
           {{ emailCookie ? `Rentrez le code reçu sur l'email ${emailCookie}` : 'Rentrez le code reçu par email' }}
         </h2>
-        <UContainer class="border rounded-2xl flex flex-col lg:px-4 mt-6 ">
+        <UContainer class="flex flex-col mt-6 border rounded-2xl lg:px-4 ">
           <UForm :schema="TokenOTPSchema" :state="stateTokenList" @submit="onSubmit">
             <div class="flex justify-center">
               <UInput v-for="(_, index) in  stateTokenList " :key="index" type="number" :autofocus="index === 0"
@@ -18,18 +18,18 @@
                 :class="`input-${index}`" :ui="{
                   base: 'text-center focus:outline-my-primary text-xl md:text-2xl lg:text-3xl', size: 'md:text-3xl text-sm'
                 }" variant="outline" color="my-accent" padded
-                class="text-black md:text-xl md:rounded-xl rounded-sm lg:mx-3 md:mx-5 mx-1 my-5" required>
+                class="mx-1 my-5 text-black rounded-sm md:text-xl md:rounded-xl lg:mx-3 md:mx-5" required>
               </UInput>
             </div>
 
             <UButton :color="hasError ? 'red' : 'green'" variant="solid"
               :icon="hasError ? 'i-heroicons-exclamation-triangle-20-solid' : 'i-heroicons-shield-check-20-solid'"
               :padded="false" :loading="isLoading" type="submit" label="Activez votre compte"
-              class="w-auto mx-auto p-5 my-5 text-black flex" :disabled="!hasCompletedToken" />
+              class="flex w-auto p-5 mx-auto my-5 text-black" :disabled="!hasCompletedToken" />
           </UForm>
         </UContainer>
 
-        <UContainer class="flex flex-col lg:px-4 mt-16">
+        <UContainer class="flex flex-col mt-16 lg:px-4">
           <UDivider icon="i-heroicons-bug-ant" />
           <h2 class="mt-5">Une erreur est survenue ?</h2>
           <UForm :schema="AuthSchema.pick({ email: true })" :state="stateResend" @submit="resendEmail">
@@ -45,7 +45,7 @@
                 </template>
               </UInput>
             </UFormGroup>
-            <UButton label="Renvoyer un email" color="my-primary" class="w-auto mx-auto p-2 my-2 flex"
+            <UButton label="Renvoyer un email" color="my-primary" class="flex w-auto p-2 mx-auto my-2"
               icon="i-heroicons-envelope-solid" :loading="isSendingEmail" variant="solid" type="submit"
               :disabled="!stateResend.email" />
           </UForm>
@@ -77,7 +77,7 @@ const hasError = ref<boolean>(false)
 const haveParams = ref<boolean>(false)
 const stateTokenList = ref<(number | undefined)[]>([undefined, undefined, undefined, undefined, undefined, undefined])
 const stateResend = ref({ email: emailCookie.value })
-
+const isComingFromPricingPage = useState('isComingFromPricingPage')
 
 // WATCHERS
 watch(() => route.params, (value: RouteParams) => {
@@ -132,7 +132,15 @@ async function goToDashboard(): Promise<void> {
   try {
     if (user.value) {
       await createProfile()
-      await navigateTo('/dashboard/home')
+
+      if (!isComingFromPricingPage.value) {
+        await navigateTo('/dashboard/home')
+      }
+
+      if (isComingFromPricingPage.value) {
+        // replace with stripe checkout
+        await navigateTo('/pricing')
+      }
 
       toast.add({
         id: 'auth_notification',

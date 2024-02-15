@@ -1,6 +1,6 @@
 <template>
   <NavHeader />
-  <main>
+  <main class="min-h-dvh">
     <slot name="body" />
 
     <CookieControl locale="fr" />

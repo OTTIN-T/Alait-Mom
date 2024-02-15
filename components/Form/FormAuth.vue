@@ -15,7 +15,7 @@
           </UButton>
         </div>
         <UDivider label="Autre" />
-        <BtnGoogleAuth :disabled="!hasCaptchaToken" class="sm:w-1/4 w-1/3 mx-auto" />
+        <BtnGoogleAuth :disabled="!hasCaptchaToken" class="w-1/3 mx-auto sm:w-1/4" />
       </UForm>
     </template>
     <template #footer>
@@ -40,6 +40,7 @@ interface FormAuthPropOptions {
 const props = withDefaults(defineProps<FormAuthPropOptions>(), {
   label: 'Rejoins nous !'
 })
+const route = useRoute()
 const toast = useToast()
 const { auth } = useSupabaseClient()
 const runtimeConfig = useRuntimeConfig()
@@ -63,6 +64,11 @@ watch(() => state.captchaToken, (value) => {
 async function onSubmit(authEvent: FormSubmitEvent<AuthSchemaType>): Promise<boolean | void | RouteLocationRaw | NavigationFailure> {
   isLoading.value = true
   emailCookie.value = authEvent.data.email
+
+  if (route.name === 'pricing') {
+    useState<boolean>('isComingFromPricingPage', () => true)
+  }
+
   const { error } = await auth.signInWithOtp({
     email: authEvent.data.email,
     options: {
